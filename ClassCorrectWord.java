@@ -199,8 +199,6 @@ public class ClassCorrectWord {
 						
 						component.getAllStyles().setBgColor(0x1a1a1a);
 						component.getAllStyles().setBgTransparency(255);
-//						component.getAllStyles().setBgColor(0xcccccc);
-//						component.getAllStyles().setBgTransparency(50);
 						
 					} 
 													
