@@ -112,7 +112,6 @@ public class ClassCrossWords {
 		
 		// Get components form Button Class
 		buttonOk = ClassButtonContainer.buttonOk;
-//		buttonOk.setEnabled(true);
 		buttonOkAction(buttonOk);
 		buttonOkTwo(buttonOk);
 		
@@ -178,8 +177,6 @@ public class ClassCrossWords {
 			String stringButton = classInputArrays.listCrossButtonPopups.get(intIndex).get(3);
 			buttonDialog(buttonThree, stringButton);
 		});
-		
-		
 	}
 	
 	public void actionListenersButtonLetters (Button button) {
@@ -239,7 +236,6 @@ public class ClassCrossWords {
 			} else {
 				buttonOk.setEnabled(false);
 			}
-//			buttonOk.setEnabled(true);
 			buttonOkAction(buttonOk);
 
 		});
@@ -265,7 +261,6 @@ public class ClassCrossWords {
 			try {
 			
 				int intIndexOld = Preferences.get("CwIndex",0);
-				
 				int intCorNew = cPojos.getintCorrects();
 				int intFalseNew = cPojos.getintFalse();
 				int intIndexNew = intIndexOld + 1;
@@ -331,7 +326,6 @@ public class ClassCrossWords {
 				
 				new ClassStartScreen().startScreen(classPojos, cPojos);
 			} catch (IOException e) {
-
 				e.printStackTrace();
 			}
 		});
@@ -391,7 +385,6 @@ public class ClassCrossWords {
 					formCrossWords.scrollComponentToVisible(buttonAgain);
 					dialogFirstNext();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -422,7 +415,6 @@ public class ClassCrossWords {
 					listGetChildren.add(stringCut);
 				}
 			}			
-//			System.out.println(listGetChildren);
 			// Get words from crosswords and compare 
 			// Get string one 
 			StringBuilder stringOne = new StringBuilder();
@@ -544,11 +536,11 @@ public class ClassCrossWords {
 	    Collections.shuffle(stringsLettersCw);
 	    
 	    for (String string : stringsLettersCw) {
-			buttonLetters = new Button(string);
-			buttonLetters.setDraggable(true);
-			buttonLetters.setName(string);
-			buttonLetters.setUIID("CrossWordsChoicesButton");
-			listDropButtons.add(buttonLetters);
+		buttonLetters = new Button(string);
+		buttonLetters.setDraggable(true);
+		buttonLetters.setName(string);
+		buttonLetters.setUIID("CrossWordsChoicesButton");
+		listDropButtons.add(buttonLetters);
 	    	containerButtons.add(buttonLetters);
 	    	
 	    	buttonLetters.addDragOverListener(l-> {		
@@ -599,7 +591,6 @@ public class ClassCrossWords {
 					
 					containerButtons.setUIID("CrossWordButtonContainer");					
 				}
-				
 			});
 	    		    	
 	    	actionListenersButtonLetters(buttonLetters);
@@ -703,14 +694,7 @@ public class ClassCrossWords {
 		UITimer timerTwo = new UITimer(new Runnable() {			
 				@Override
 				public void run() {	
-//					// Disable all buttons until dialog is closed
-//					for (Component component : containerButtons) {
-//						component.setEnabled(false);
-//					}
-					// Make form unscrollable until dialog is closed
-//					formTextQuestions.setScrollableY(false);
-					// Set dialog text and disable preference 
-					classPojos.setStringFirstRun("Clique nosbotões para ver a pergunta e arraste as letras para os campos abaixo.... ");
+					classPojos.setStringFirstRun("Clique nos botões para ver a pergunta e arraste as letras para os campos abaixo.... ");
 					classPojos.setStringPreferences("CwFirstRunStart");
 					// Call first run dialog
 					cfd.dialogFirstRunStart(classPojos, formCrossWords);
