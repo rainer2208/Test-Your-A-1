@@ -34,21 +34,21 @@ public class ClassFirstRunDialogs {
 		
 	public void dialogSettings (Button buttonClose, Button buttonDialog, Container containerDialogBase , Label label, Dialog dialog, TextArea popupBody) throws IOException {
 		
-		buttonDialog.setUIID("DialogButtonFirstRun");
-		buttonClose.setUIID("DialogButtonFirstRun");
-		buttonClose.getAllStyles().setAlignment(Component.LEFT);
+	buttonDialog.setUIID("DialogButtonFirstRun");
+	buttonClose.setUIID("DialogButtonFirstRun");
+	buttonClose.getAllStyles().setAlignment(Component.LEFT);	
 		
-		containerDialogBase.setUIID("DialogContainerBase");
+	containerDialogBase.setUIID("DialogContainerBase");
 		
-		dialog.setLayout(new BorderLayout());
+	dialog.setLayout(new BorderLayout());
         dialog.setDialogUIID("Popup");
         dialog.setDisposeWhenPointerOutOfBounds(false);
 		
-		label.getAllStyles().setAlignment(Component.CENTER);
-		label.getAllStyles().setPadding(0, 0, 20, 20);
-		label.getAllStyles().setMargin(0, 0, 0, 0);
+	label.getAllStyles().setAlignment(Component.CENTER);
+	label.getAllStyles().setPadding(0, 0, 20, 20);
+	label.getAllStyles().setMargin(0, 0, 0, 0);
 		
-		popupBody.setUIID("PopupBody");
+	popupBody.setUIID("PopupBody");
         popupBody.setEditable(false);
 		
 	}
@@ -56,7 +56,6 @@ public class ClassFirstRunDialogs {
 	public void dialogFirstRunStart (ClassPojos classPojos, Form form) {
 		
 		try {
-
 			buttonClose = new Button("fechar");
 			buttonDialog = new Button("não mostre +");
 
@@ -70,10 +69,10 @@ public class ClassFirstRunDialogs {
 			
 			if (classPojos.getStringFirstRun().equals("first run start screen")) {
 				
-				Image imgageBackground = Image.createImage("/Botton_Arrow.png");
-				popupBody.setText("Nesta tela tem quatro botões, cada qual para um desafio .... clique para testar!");
+			Image imgageBackground = Image.createImage("/Botton_Arrow.png");
+			popupBody.setText("Nesta tela tem quatro botões, cada qual para um desafio .... clique para testar!");
 
-				containerDialogBase.add(BorderLayout.CENTER, popupBody);
+			containerDialogBase.add(BorderLayout.CENTER, popupBody);
 		        containerDialogBase.add(BorderLayout.SOUTH,label);
 		        containerDialogBase.add(BorderLayout.NORTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
 				
@@ -85,11 +84,11 @@ public class ClassFirstRunDialogs {
 				popupBody.setText("Neste menu lateral tem várias opções de personalização e para entar em contato conosco!");
 
 				containerDialogBase.add(BorderLayout.CENTER, popupBody);
-		        containerDialogBase.add(BorderLayout.NORTH,label);
-		        containerDialogBase.add(BorderLayout.SOUTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
+		        	containerDialogBase.add(BorderLayout.NORTH,label);
+		        	containerDialogBase.add(BorderLayout.SOUTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
 				
-		        label.setIcon(imgageBackground);
-		        label.getAllStyles().setAlignment(Component.LEFT);
+		        	label.setIcon(imgageBackground);
+		       	 	label.getAllStyles().setAlignment(Component.LEFT);
 				
 				
 			} else {
@@ -97,22 +96,20 @@ public class ClassFirstRunDialogs {
 				Image imgageBackground = Image.createImage("/Botton_Arrow_Up.png");					
 				popupBody.setText(classPojos.getStringFirstRun());
 				popupBody.setRows(4);
-		        containerDialogBase.add(BorderLayout.CENTER, popupBody);
-		        containerDialogBase.add(BorderLayout.NORTH,label);
-		        containerDialogBase.add(BorderLayout.SOUTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
+		        	containerDialogBase.add(BorderLayout.CENTER, popupBody);
+		       	 	containerDialogBase.add(BorderLayout.NORTH,label);
+		        	containerDialogBase.add(BorderLayout.SOUTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
 		        
-		        label.setIcon(imgageBackground);
+		        	label.setIcon(imgageBackground);
 
 			}
 	        
 	        dialogStart.add(BorderLayout.CENTER, containerDialogBase);
 	        dialogStart.setDisposeWhenPointerOutOfBounds(false);
 	        
-	        buttonClose.addActionListener(l -> {
-   	
+	        buttonClose.addActionListener(l -> {   	
 	        	form.setScrollableY(true);
-	        	dialogStart.dispose();
-	        	
+	        	dialogStart.dispose();	        	
 	        });
 	        
 	        buttonDialog.addActionListener(l -> {
@@ -123,7 +120,6 @@ public class ClassFirstRunDialogs {
 	        });
 	        
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 	
@@ -147,24 +143,22 @@ public class ClassFirstRunDialogs {
 		label.getAllStyles().setAlignment(Component.LEFT);
 		label.setIcon(imgageBackground);
 
-
 		// Put everything together 
 		containerDialog.add(BorderLayout.EAST,buttonDialog);
 		
-        containerDialogBase.add(BorderLayout.CENTER, popupBody);
-        containerDialogBase.add(BorderLayout.SOUTH,label);
-        containerDialogBase.add(BorderLayout.NORTH,containerDialog);
+        	containerDialogBase.add(BorderLayout.CENTER, popupBody);
+        	containerDialogBase.add(BorderLayout.SOUTH,label);
+       		containerDialogBase.add(BorderLayout.NORTH,containerDialog);
         
-        dialogNext.add(BorderLayout.CENTER, containerDialogBase);
+        	dialogNext.add(BorderLayout.CENTER, containerDialogBase);
        
         
         // Button action
        
         buttonClose.addActionListener(l -> {
-
         	for (Component component : containerButtonNext) {
         		component.setEnabled(true);
-			}
+		}
         	
         	dialogNext.dispose();
         });
@@ -182,7 +176,6 @@ public class ClassFirstRunDialogs {
 	 		   dialogNext.dispose(); 		   
 	 		   firstRunNext(classPojos, buttonInformation, buttonNext, buttonAgain, containerButtonNext);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}        	
         });
@@ -190,32 +183,29 @@ public class ClassFirstRunDialogs {
         switch(stringLevel) {
         case "A" : 
         	label.getAllStyles().setAlignment(Component.CENTER);
-     	    popupBody.setText("...com este botão pode consultar a explicação das questões..");
-     	    dialogNext.showPopupDialog(buttonInformation);
-            break;
+     	    	popupBody.setText("...com este botão pode consultar a explicação das questões..");
+     	    	dialogNext.showPopupDialog(buttonInformation);
+            	break;
         case "B" :
         	label.getAllStyles().setAlignment(Component.RIGHT);
         	buttonDialog.setText("não mostre +");
-     	    popupBody.setText("...e o botão da direita leva você para a próxima questão.");
-     	    containerDialog.add(BorderLayout.EAST,buttonClose);
-     	    containerDialog.add(BorderLayout.WEST,buttonDialog);
-            dialogNext.showPopupDialog(buttonNext); 
-            if (classPojos.getStringFirstRun().equals("imported container")) {
-				 enableNext();
-			}
+     	    	popupBody.setText("...e o botão da direita leva você para a próxima questão.");
+     	    	containerDialog.add(BorderLayout.EAST,buttonClose);
+     	    	containerDialog.add(BorderLayout.WEST,buttonDialog);
+            	dialogNext.showPopupDialog(buttonNext); 
+            	if (classPojos.getStringFirstRun().equals("imported container")) {
+			enableNext();
+		}
             enableNextWord(containerButtonNext);
             for (Component component : containerButtonNext) {
-        		component.setEnabled(true);
-			}
+        	component.setEnabled(true);
+		}
             break;
         case "C":
             dialogNext.dispose();
-            Preferences.set(classPojos.getStringPreferences(),1);
-            
-            
+            Preferences.set(classPojos.getStringPreferences(),1);           
             break;
- 	   }
-		
+ 	   }		
 	}
 	
 	public void firstRunOK (ClassFrases classFrases , ClassTextQuestions classTextQuestions , ClassPojos classPojos , Button buttonOk , Form form) { 
@@ -239,22 +229,20 @@ public class ClassFirstRunDialogs {
 			popupBody.setRows(3);
 			
 			containerDialogBase.add(BorderLayout.CENTER, popupBody);
-	        containerDialogBase.add(BorderLayout.SOUTH,label);
-	        containerDialogBase.add(BorderLayout.NORTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
+	        	containerDialogBase.add(BorderLayout.SOUTH,label);
+	        	containerDialogBase.add(BorderLayout.NORTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
 			
-	        label.setIcon(imgageBackground);
-	        label.getAllStyles().setAlignment(Component.LEFT);
+	        	label.setIcon(imgageBackground);
+	        	label.getAllStyles().setAlignment(Component.LEFT);
 	        
-	        dialogStart.add(BorderLayout.CENTER, containerDialogBase);
-	        dialogStart.setDisposeWhenPointerOutOfBounds(false);
+	        	dialogStart.add(BorderLayout.CENTER, containerDialogBase);
+	        	dialogStart.setDisposeWhenPointerOutOfBounds(false);
 
-	        buttonClose.addActionListener(l -> {
-   	
-	        	buttonOk.setEnabled(true);
-	        	form.setScrollableY(true);
-	        	dialogStart.dispose();
-	        	
-	        });
+	        	buttonClose.addActionListener(l -> {   	
+	        		buttonOk.setEnabled(true);
+	        		form.setScrollableY(true);
+	        		dialogStart.dispose();	        	
+	       		 });
 	        
 	        buttonDialog.addActionListener(l -> {
 	        	
@@ -269,7 +257,6 @@ public class ClassFirstRunDialogs {
 	        });
 	        
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		
