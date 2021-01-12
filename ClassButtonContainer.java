@@ -45,8 +45,6 @@ public class ClassButtonContainer {
 	private static Slider sliderFalses = new Slider();
 
 	public static Container containerMenu() {
-		
-		
 
 		componentSettings();
 
