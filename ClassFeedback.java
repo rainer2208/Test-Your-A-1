@@ -167,14 +167,11 @@ class ClassFeedback {
         SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
         r.setHighlighted(true);
         
-
         // Create the chart ... pass the values and renderer to the chart object.
-
         PieChart chart = new PieChart(buildCategoryDataset("Project budget", values), renderer);
 
         // Wrap the chart in a Component so we can add it to a form
-        ChartComponent c = new ChartComponent(chart);
-        
+        ChartComponent c = new ChartComponent(chart);        
         containerGraph.add(c);
 
 	 }
@@ -186,10 +183,8 @@ class ClassFeedback {
 	       
 	        for (int i = 0 ; i != values.length ; i++) {
 	            series.add(strings[i], values[i]);
-	        }
-	        
-			return series;
-	        
+	        }	        
+			return series;	        
 	}
 	 
 	private DefaultRenderer buildCategoryRenderer(int[] colors) {
@@ -199,8 +194,7 @@ class ClassFeedback {
 	        for (int color : colors) {
 	            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
 	            r.setColor(color);
-	            renderer.addSeriesRenderer(r);
-	            
+	            renderer.addSeriesRenderer(r);	            
 	        }
 	        return renderer;
 	 }
