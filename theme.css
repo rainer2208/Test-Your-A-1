@@ -3,30 +3,22 @@
     PopupDialogArrowBool: true;
     radioSelectedFocusImage: "Radio_btn_Press.png";
     radioSelectedImage: "Radio_btn_Press.png";
-/*     radioUnselectedFocusImage: "Radio_btn_Normal.png"; */
-/*     radioUnselectedImage: "Radio_btn_Normal.png"; */
     radioSelectedImage:  "Radio_btn_Press.png";
     radioSelectedImage:  "Radio_btn_Press.png";
     radioSelectedFocusImage: "Radio_btn_Press.png";
-/*     radioUnselectedImage:  "Radio_btn_Press.png"; */
-/*     radioUnselectedFocusImage:  "Radio_btn_Press.png"; */
     radioSelectedDisImage:  "Radio_btn_Press.png";
     radioSelectedDisFocusImage:  "Radio_btn_Press.png"; 
-/*     radioUnselectedDisImage:  "Radio_btn_Press.png"; */
-/*     radioUnselectedDisFocusImage: "Radio_btn_Press.png"; */
-	sideMenuImage:  "Hamburger_Menu.png";
+    sideMenuImage:  "Hamburger_Menu.png";
 }  
 
 Images {
     background-image: url(Radio_btn_Press.png);
     background-image: url(Hamburger_Menu.png);
-/*     PopupDialogArrowBottomImage: url(Botton_Arrow.png); */
     cn1-source-dpi: 160;
 }
 
 ButtonChoice {
-	background-color: #1a1a1a;
-/* 	background-color: #73258d; */
+    background-color: #1a1a1a;
     margin: 10pt;
     text-align: center;
     color: white;
@@ -34,8 +26,6 @@ ButtonChoice {
 
 ButtonChoice.pressed {
 	border: 1pt solid transparent;
-/*  	box-shadow: 0pt 0pt 20pt 10px white; */
-/* 	background-color: transparent; */
 	background-color: #333333;
 }
 
@@ -84,7 +74,6 @@ ButtonNextOK.pressed {
 ButtonNextOK.disabled {
 	background-color: #4d3d00;
 	border: 1pt solid #b38f00;
-/* 	border-color: transparent; */
 }
 
 ButtonNextContainer.disabled {
@@ -273,10 +262,7 @@ DialogContainerBase {
 }
 
 FraseContainerOptions {
-/* 	border:2pt solid #1a1a1a; */
-/* 	box-shadow: inset 2px 2px 1px 1px rgba(255,255,255,0.75); */
 	background-color: transparent;
-/* 	background-color: rgba(115, 37, 141, 0.3); */
 	padding-top: 20pt;
 }
 
@@ -368,7 +354,6 @@ PopupBody {
 }
 
 QuestionsButtonChoice {
-/* 	background-color: #262626; */
 	background-color: #800060;
 	margin: 30pt;
 	padding-top: 40pt;
@@ -388,26 +373,16 @@ QuestionsButtonChoice.disabled {
 
 QuestionsButtonChoiceSelected {
 	background-color: #b30086;
-/* 	background-color: transparent; */
-/* 	border: 3pt solid #cc0099; */
 	margin: 30pt;
 }
 
 QuestionsButtonChoiceCorrect {
-/* 	background-color: red; */
-/* 	background-color: #b30086; */
 	background-color: #267326;
-/* 	background-color: rgba(204,0,153,0.2); */
-/* 	border: 12pt solid #206020; */
 	margin: 30pt;
 }
 
 QuestionsButtonChoiceFalse {
-/* 	background-color: #b30086; */
 	background-color: #b30000;
-/* 	background-color: rgba(204,0,153,0.2); */
-/* 	background-color: transparent; */
-/* 	border: 12pt solid #990000; */
 	margin: 30pt;
 }
 
@@ -418,7 +393,7 @@ QuestionsButtonChoiceText {
 }
 
 QuestionsButtonChoiceText.pressed {
-/* 	font-size: 9pt; */
+ 	font-size: 9pt; 
 }
 
 QuestionsLabelQuestion {
