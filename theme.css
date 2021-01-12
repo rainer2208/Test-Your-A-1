@@ -1,0 +1,546 @@
+#Constants {
+    includeNativeBool: true; 
+    PopupDialogArrowBool: true;
+    radioSelectedFocusImage: "Radio_btn_Press.png";
+    radioSelectedImage: "Radio_btn_Press.png";
+/*     radioUnselectedFocusImage: "Radio_btn_Normal.png"; */
+/*     radioUnselectedImage: "Radio_btn_Normal.png"; */
+    radioSelectedImage:  "Radio_btn_Press.png";
+    radioSelectedImage:  "Radio_btn_Press.png";
+    radioSelectedFocusImage: "Radio_btn_Press.png";
+/*     radioUnselectedImage:  "Radio_btn_Press.png"; */
+/*     radioUnselectedFocusImage:  "Radio_btn_Press.png"; */
+    radioSelectedDisImage:  "Radio_btn_Press.png";
+    radioSelectedDisFocusImage:  "Radio_btn_Press.png"; 
+/*     radioUnselectedDisImage:  "Radio_btn_Press.png"; */
+/*     radioUnselectedDisFocusImage: "Radio_btn_Press.png"; */
+	sideMenuImage:  "Hamburger_Menu.png";
+}  
+
+Images {
+    background-image: url(Radio_btn_Press.png);
+    background-image: url(Hamburger_Menu.png);
+/*     PopupDialogArrowBottomImage: url(Botton_Arrow.png); */
+    cn1-source-dpi: 160;
+}
+
+ButtonChoice {
+	background-color: #1a1a1a;
+/* 	background-color: #73258d; */
+    margin: 10pt;
+    text-align: center;
+    color: white;
+}
+
+ButtonChoice.pressed {
+	border: 1pt solid transparent;
+/*  	box-shadow: 0pt 0pt 20pt 10px white; */
+/* 	background-color: transparent; */
+	background-color: #333333;
+}
+
+ButtonChoiceText {
+    color: white;
+    font-size: 8pt;
+    text-align: center;	
+}
+
+ButtonNext {
+	background-color: #004d00;
+	border-radius: 6pt;
+	color: white;
+	font-size: 7pt;
+	margin: 20pt;  
+	padding-top: 20pt; 
+	padding-bottom: 20pt; 
+	text-align: center; 
+}
+
+ButtonNext.pressed {
+	border: 1pt solid #004d00;
+	background-color: transparent; 
+}
+
+ButtonNext.disabled {
+	background-color: rgba(0, 77, 0, 0.5);
+	border-color: transparent;
+}
+
+ButtonNextOK {
+	background-color: #b38f00;
+	border-radius: 6pt;
+	color: white;
+	font-size: 7pt;
+	margin: 20pt;  
+	padding-top: 20pt; 
+	text-align: center; 
+}
+
+ButtonNextOK.pressed {
+	border: 1pt solid #b38f00;
+	background-color: transparent; 
+}
+
+ButtonNextOK.disabled {
+	background-color: #4d3d00;
+	border: 1pt solid #b38f00;
+/* 	border-color: transparent; */
+}
+
+ButtonNextContainer.disabled {
+	background-color: rgba(0, 77, 0, 0.5);
+	border-color: transparent;
+}
+
+ButtonNextContainer.pressed {
+	border: 1pt solid #004d00;
+	background-color: transparent; 
+}
+
+ContainerProgress {
+	background-color: transparent;
+	border: 1pt solid #003300;
+	border-radius: 3pt; 
+	padding: 5pt; 
+}
+
+CrossWordButtonQuestion {
+	background-color: #b38f00;
+	border-radius: 6pt;
+	color: white;
+	font-size: 7pt;
+	margin: 10pt;  
+	padding-top: 17pt; 
+	padding-bottom: 17pt; 
+	text-align: center; 
+}
+
+CrossWordButtonQuestion.pressed {
+	background-color: #997a00;
+}
+
+CrossWordButtonContainer {
+	border-bottom: 1pt solid #99003d;
+	margin-top: 20pt;
+	margin-left: 60pt;
+	margin-right: 60pt;
+	padding-top: 60pt;
+	padding-bottom: 60pt;
+}
+
+CrossWordsChoicesButtonBase {
+	border-radius: 8pt;
+	margin: 8pt;
+	padding-top: 20pt;
+	padding-bottom: 20pt;	
+}
+
+CrossWordsChoicesButton {
+	cn1-derive: CrossWordsChoicesButtonBase;
+	background-color: #003380;
+	box-shadow: inset 0px 0px 2pt 1pt rgba(255, 255, 255, 0.7);
+	color: white;
+	font-size: 8pt;	
+	text-align: center;
+}
+
+CrossWordsChoicesButton.pressed {
+	background-color: #0047b3;
+	border-color: transparent;
+}
+
+CrossWordsChoicesButtonRight {
+	cn1-derive: CrossWordsChoicesButtonBase;
+	background-color: #003380;
+	box-shadow: inset 0px 0px 2pt 1pt rgba(255, 255, 255, 0.7);
+	color: rgba(56, 199, 66, 0.7);
+	font-size: 8pt;	
+	text-align: center;
+}
+
+CrossWordsChoicesButtonWrong {
+	cn1-derive: CrossWordsChoicesButtonBase;
+	background-color: #003380;
+	box-shadow: inset 0px 0px 2pt 1pt rgba(255, 255, 255, 0.7);
+	color: rgba(255, 0, 102, 0.7);
+	font-size: 8pt;	
+	text-align: center;
+}
+
+CrossWordsContainerLetterHolder {
+	background-color: #0d0d0d; 
+	border: 1pt solid #404040; 
+	border-radius: 2pt;
+	margin: 8pt;
+}
+
+CrossWordsContainerLetterHolderNull {
+	border-color: transparent; 
+	margin: 8pt;
+/* 	padding: 15pt; */
+}
+
+CrossWordsCcontainerBase {
+	border-bottom: 1pt solid #99003d;
+	margin-top: 60pt;
+	margin-bottom: 30pt;	
+	margin-left: 50pt;
+	margin-right: 50pt;	
+	padding-bottom: 80pt;
+}
+
+DialogButton {
+	background-color: transparent;
+	color: #00b3b3;
+	font-size: 8pt;	
+	font-weight: heavy;
+	margin-right: 40pt;
+	margin-bottom: 10pt;
+	padding-top: 15pt;
+	text-align: right;
+}
+
+DialogButton.pressed {
+	color: #66ffff;
+}
+
+DialogButtonFirstRun {
+	background-color: black;
+	color: #00b3b3;
+	font-size: 8pt;	
+	font-weight: heavy;
+	margin-left: 20pt;
+	margin-right: 20pt;
+	margin-bottom: 0pt;
+	margin-top: 0pt;
+	padding: 15pt;
+	text-align: right;
+}
+
+DialogButtonFirstRun.pressed {
+	color: #66ffff;
+}
+
+DialogButtonFinal {
+	color: #00b3b3;
+	font-size: 8pt;	
+	font-weight: heavy;
+	margin: 5pt;
+	padding: 5pt;
+	text-align: center;
+}
+
+DialogButtonFinal.pressed {
+	color: #66ffff;
+}
+
+DialogExplain {
+	background-color: transparent;
+	padding: 50pt;
+}
+
+DialogLabelPercentage {
+	border: 3pt solid white;
+	border-radius: 3pt;
+	color: white;
+	font-size: 20pt;
+	padding: 20pt;
+	text-align: center;
+}
+
+DialogSpanLabel {
+	background-color: #404040;
+	padding-top: 50pt;
+	padding-right: 30pt;
+	padding-left: 30pt;
+}
+
+DialogSpanLabelText {
+	color: white;
+ 	font-size: 7pt;	
+ 	padding-left: 50pt;
+}
+
+DialogContainer {
+	background-color: #404040;
+}
+
+DialogContainerBase {
+	background-color: black;
+	border-radius: 5pt;
+	margin: 0pt;
+	padding: 20pt;
+}
+
+FraseContainerOptions {
+/* 	border:2pt solid #1a1a1a; */
+/* 	box-shadow: inset 2px 2px 1px 1px rgba(255,255,255,0.75); */
+	background-color: transparent;
+/* 	background-color: rgba(115, 37, 141, 0.3); */
+	padding-top: 20pt;
+}
+
+FrasesLabelQuery {
+	background-color: #0047b3;
+	padding: 10pt;
+}
+
+FrasesLabelQueryText {
+	color: white;
+	font-size: 9pt;
+	text-align: center;
+	padding-left: 15pt;
+	padding-right: 15pt;
+}
+
+FrasesRadio {
+	background-color: #1a1a1a;
+	color: white;
+	font-size: 8pt;
+	margin-bottom: 60pt;
+	padding-left: 60pt;
+	padding-top: 50pt;
+	padding-bottom: 50pt;
+}
+
+FrasesRadioWrong {
+	background-color: #1a1a1a;
+	color: #b30000;
+	font-size: 8pt;
+	margin-bottom: 60pt;
+	padding-left: 60pt;
+	padding-top: 50pt;
+	padding-bottom: 50pt;
+}
+
+FrasesRadioRight {
+	background-color: #1a1a1a;
+	color: #267326;
+	font-size: 8pt;
+	margin-bottom: 60pt;
+	padding-left: 60pt;
+	padding-top: 50pt;
+	padding-bottom: 50pt;
+}
+
+FrasesRadio.disabled {
+	color: #cccccc;	
+}
+
+LabelCount {
+	background-color: transparent;
+	border-radius: 6pt;
+	border: 1pt solid #004d00;
+	color: white; 
+	font-size: 7pt;
+	margin: 22pt; 
+	text-align: center; 
+}
+
+LabelQuery {
+	background-color: #99003d;
+	border-radius: 2pt;
+	color: white;
+	font-size: 9pt;
+	text-align: center;
+}
+
+Popup {
+	background-color: transparent;
+	border-radius: 5pt;
+	margin-left: 30pt;
+	margin-right: 30pt;
+	padding: 0pt;
+}
+
+PopupBody {
+	background-color: black;
+	border: 2pt solid red;
+	border-radius: 5pt;
+	color: white;
+	font-size: 8pt;	
+	font-family: "native:MainThin";
+	margin-bottom: 0pt;
+	margin-top: 0pt;
+	margin-left: 25pt;
+	margin-right: 25pt;
+	padding: 35pt;
+}
+
+QuestionsButtonChoice {
+/* 	background-color: #262626; */
+	background-color: #800060;
+	margin: 30pt;
+	padding-top: 40pt;
+	padding-bottom: 40pt;
+	padding-left: 10pt;
+}
+
+QuestionsButtonChoice.pressed {
+	background-color: #66004d;
+	margin: 30pt;
+}
+
+QuestionsButtonChoice.disabled {
+	background-color: #262626;
+	margin: 30pt;
+}
+
+QuestionsButtonChoiceSelected {
+	background-color: #b30086;
+/* 	background-color: transparent; */
+/* 	border: 3pt solid #cc0099; */
+	margin: 30pt;
+}
+
+QuestionsButtonChoiceCorrect {
+/* 	background-color: red; */
+/* 	background-color: #b30086; */
+	background-color: #267326;
+/* 	background-color: rgba(204,0,153,0.2); */
+/* 	border: 12pt solid #206020; */
+	margin: 30pt;
+}
+
+QuestionsButtonChoiceFalse {
+/* 	background-color: #b30086; */
+	background-color: #b30000;
+/* 	background-color: rgba(204,0,153,0.2); */
+/* 	background-color: transparent; */
+/* 	border: 12pt solid #990000; */
+	margin: 30pt;
+}
+
+QuestionsButtonChoiceText {
+	color: white;
+	font-size: 8pt;
+	text-align: center;
+}
+
+QuestionsButtonChoiceText.pressed {
+/* 	font-size: 9pt; */
+}
+
+QuestionsLabelQuestion {
+	background-color: #250033;
+	border-radius: 2pt;
+	margin: 25pt;
+	padding: 25pt;
+}
+
+QuestionsLabelQuestionText {
+	color: white;
+}
+
+QuestionsSpanLabelText {
+	border: 1pt solid white;
+	border-radius: 3pt;
+	color: white;
+	margin: 20pt;
+	padding: 5pt;
+}
+
+SideCommand {
+	background-color: #1a1a1a;
+	color: white;
+	font-size: 7pt;
+	margin-left: 20pt;
+	margin-right: 20pt;
+	margin-top: 5pt;
+	padding: 60pt;
+}
+
+SideCommand.pressed {
+	background-color: #262626;
+}
+
+SideNavigationPanel {
+	background-color: #0d0d0d;
+	padding-top: 70pt;
+}
+
+SideMenuButton {
+	background-color: #1a1a1a;
+	color: #b30000;
+	font-size: 8pt;
+	margin-left: 20pt;
+	margin-right: 20pt;
+	margin-top: 5pt;
+	padding: 60pt;
+}
+
+SideMenuButton.pressed {
+	background-color: #262626;
+}
+
+SideMenuSpanLabel {
+	background-color: #1a1a1a;
+	border: 1pt solid  #262626;
+	margin-top: 80pt;
+	margin-left: 40pt;
+	margin-right: 40pt;
+	margin-bottom: 80pt;
+	padding: 50pt;
+}
+
+SideMenuSpanLabelText {
+	color: white;
+	font-size: 6pt;
+}
+
+SideMenuTextField {
+	background-color: black;
+	color: white;
+	font-size: 7pt;	
+	font-family: "native:MainThin";
+	margin-bottom: 15pt;
+}
+
+SliderCorrects {
+	background-color: transparent;	
+	border: 1pt solid #003300;
+	color: white; 
+	border-radius: 2pt;
+	font-size: 6pt;
+	margin: 15pt; 
+	padding: 12pt;
+	text-align: center;
+}
+
+SliderCorrectsFull {
+	background-color: rgba(0, 153, 51, 0.3);
+}
+
+SliderFalses {
+	background-color: transparent;	
+	border: 1pt solid rgba(255, 0, 0, 0.3);
+	color: white; 
+	border-radius: 2pt;
+	font-size: 6pt;
+	margin: 15pt; 
+	padding: 12pt;
+	text-align: center;
+}
+
+SliderFalsesFull {
+	background-color: rgba(255, 0, 0, 0.3);
+}
+
+StartScreenButton {
+	border-radius: 5pt;
+	margin: 5pt;
+	padding: 35pt;
+}
+
+StartScreenContainerButton {
+	border: 1pt solid #0d0d0d;
+	border-radius: 3pt;
+	padding: 10pt;
+}
+
+StartScreenLabelCount {
+	color: #800000;
+	font-size: 9pt;
+	padding: 15pt;
+	text-align: center;
+}
