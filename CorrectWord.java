@@ -1,4 +1,4 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,17 +33,17 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UITimer;
 
-public class ClassCorrectWord {
+public class CorrectWord {
 		
 	private Button buttonDialogAgain;
 	private Button buttonDialogHome;
 	private Button buttonNext = new Button();
 	public Button buttonAgain = new Button(); 
 	public Button buttonInformation = new Button();
-	private ClassInputArrays inputArrays;
-	private ClassFirstRunDialogs classFirstRunDialogs = new ClassFirstRunDialogs ();
-	private ClassFeedback classFeedback = new ClassFeedback();
-	private ClassPojos classPojos = new ClassPojos();
+	private InputArrays inputArrays;
+	private FirstRunDialogs firstRunDialogs = new FirstRunDialogs ();
+	private Feedback feedback = new Feedback();
+	private Pojos pojos = new Pojos();
 	public Command back;
 	private Container containerButton = new Container(new GridLayout(2,2));
 	private Container containerButtonNext = new Container(new GridLayout(1,4));
@@ -70,20 +70,20 @@ public class ClassCorrectWord {
 	private String stringControl;
 	private Toolbar toolbar = formCorrectWords.getToolbar();
 	
-	public void correctWords(Form a, Label label, ClassPojos2 classPojos2) throws IOException {
+	public void correctWords(Form a, Label label, Pojos2 pojos2) throws IOException {
 	
 		initialLoads();
 		
 		if (Preferences.get("WordsFirstOne",0) == 0) {
 			
-			dialogFirstRunStart(classPojos);
+			dialogFirstRunStart(pojos);
 		}
 		
 		Command back = new Command("A") {
 	        @Override
 	        public void actionPerformed(ActionEvent evt) {
 
-	        	label.setText(classPojos2.getintLabelCount() + "/ 95");
+	        	label.setText(pojos2.getintLabelCount() + "/ 95");
 	            a.showBack();
 	            
 	        }
@@ -160,7 +160,7 @@ public class ClassCorrectWord {
 					sliderCorrects.setProgress(indNew);
 					
 					try {
-						classFeedback.soundCorrect(media, inputStreamCorrect);
+						feedback.soundCorrect(media, inputStreamCorrect);
 					} catch (IOException e) {
 					}
 					
@@ -183,7 +183,7 @@ public class ClassCorrectWord {
 					sliderFalses.setProgress(indNew);
 					
 					try {
-						classFeedback.soundInCorrect(media, inputStreamFalse);
+						feedback.soundInCorrect(media, inputStreamFalse);
 					} catch (IOException e) {
 						
 					}
@@ -230,7 +230,7 @@ public class ClassCorrectWord {
 			
 		}
 
-		actions(a, label, classPojos2);
+		actions(a, label, pojos2);
 	
 		styles();
 		
@@ -248,14 +248,14 @@ public class ClassCorrectWord {
 		
 	}
 
-	public void dialogActions (Form formBack, Label label, ClassPojos2 classPojos2) {
+	public void dialogActions (Form formBack, Label label, Pojos2 classPojos2) {
 		
 		buttonDialogAgain.addActionListener(l-> {
 			try {
 				Preferences.set("NextString",0); 
 				Preferences.set("InCorrectAnswers",0);
 				Preferences.set("CorrectAnswers" , 0);
-				new ClassCorrectWord().correctWords(formBack, label, classPojos2);
+				new CorrectWord().correctWords(formBack, label, classPojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -267,20 +267,20 @@ public class ClassCorrectWord {
 				Preferences.set("IndexFrases",0); 
 				Preferences.set("FrasesCorrectAnswers",0);
 				Preferences.set("FrasesFalseAnswers" , 0);
-				new ClassStartScreen().startScreen(classPojos, classPojos2);
+				new StartScreen().startScreen(pojos, classPojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 	}
 	
-	public void actions (Form a, Label label, ClassPojos2 classPojos2) {
+	public void actions (Form a, Label label, Pojos2 classPojos2) {
 		
 		buttonAgain.addActionListener(l -> {
 			
 			try {		
 				changeTransitions(formCorrectWords);
-				new ClassCorrectWord().correctWords(a , label, classPojos2);
+				new CorrectWord().correctWords(a , label, classPojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -293,9 +293,9 @@ public class ClassCorrectWord {
 				
 				ArrayList <String> listDialog = inputArrays.listExplanation;
 				
-				classPojos.setDialogList(listDialog);
-				classPojos.setintTotal(Preferences.get("NextString",0));
-				classFeedback.dialogExplainFrases(classPojos);
+				pojos.setDialogList(listDialog);
+				pojos.setintTotal(Preferences.get("NextString",0));
+				feedback.dialogExplainFrases(pojos);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -314,12 +314,12 @@ public class ClassCorrectWord {
 					int corrects = sliderCorrects.getProgress();
 					int falses = sliderFalses.getProgress();
 
-					classPojos.setintTotal(indexTotal);
-					classPojos.setintCorrects(corrects);
-					classPojos.setintFalse(falses);
+					pojos.setintTotal(indexTotal);
+					pojos.setintCorrects(corrects);
+					pojos.setintFalse(falses);
 
-					ClassFeedback cf = new ClassFeedback();
-					cf.dialogFinal(classPojos);
+					Feedback cf = new Feedback();
+					cf.dialogFinal(pojos);
 					buttonDialogAgain = cf.getButtonDialogRepeat();
 					buttonDialogHome = cf.getButtonDialogHome();
 					dialogActions(a , label, classPojos2);
@@ -337,7 +337,7 @@ public class ClassCorrectWord {
 				
 				try {
 					changeTransitions(formCorrectWords);
-					new ClassCorrectWord().correctWords(a , label, classPojos2);
+					new CorrectWord().correctWords(a , label, classPojos2);
 
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -354,15 +354,15 @@ public class ClassCorrectWord {
 			component.setEnabled(false);
 		}
 		// Set preference to disable dialog 
-		classPojos.setStringPreferences("FirstRunNext");
+		pojos.setStringPreferences("FirstRunNext");
 		// Call first run dialog 
-		classFirstRunDialogs.firstRunNext(classPojos, buttonInformation, buttonNext, buttonAgain, containerButtonNext);
-		Dialog dialog = classFirstRunDialogs.getDialogNext();
+		firstRunDialogs.firstRunNext(pojos, buttonInformation, buttonNext, buttonAgain, containerButtonNext);
+		Dialog dialog = firstRunDialogs.getDialogNext();
 		dialog.showPopupDialog(buttonAgain);	
 		
 	}
 	
-	public void dialogFirstRunStart (ClassPojos classPojos) {
+	public void dialogFirstRunStart (Pojos pojos) {
 		
 		UITimer timerTwo = new UITimer(new Runnable() {			
 			@Override
@@ -372,14 +372,14 @@ public class ClassCorrectWord {
 					component.setEnabled(false);
 				}
 				// Set dialog text and disable preference 
-				classPojos.setStringFirstRun("Escolha embaixo um botão que responde a esta pergunta .... ");
-				classPojos.setStringPreferences("WordsFirstOne");
+				pojos.setStringFirstRun("Escolha embaixo um botão que responde a esta pergunta .... ");
+				pojos.setStringPreferences("WordsFirstOne");
 				// Call first run dialog
-				classFirstRunDialogs.dialogFirstRunStart(classPojos, formCorrectWords);
+				firstRunDialogs.dialogFirstRunStart(pojos, formCorrectWords);
 				// Call avtivation constructor
-				classFirstRunDialogs.enableStart(containerButton);
+				firstRunDialogs.enableStart(containerButton);
 				// Create interaction dialog
-				Dialog dialog = classFirstRunDialogs.getDialogStart();
+				Dialog dialog = firstRunDialogs.getDialogStart();
 				dialog.showPopupDialog(labelQuery);
 
 				}
@@ -397,7 +397,7 @@ public class ClassCorrectWord {
 		sliderCorrects = new Slider();
 		sliderFalses = new Slider();
 		
-		inputArrays = new ClassInputArrays();
+		inputArrays = new InputArrays();
 		inputArrays.consolidatedLists();
 
 		// Index loads
@@ -417,7 +417,7 @@ public class ClassCorrectWord {
 	    final Transition originalIn = formCorrectWords.getTransitionInAnimator();
 	    formCorrectWords.setTransitionOutAnimator(CommonTransitions.createEmpty());
 	    formCorrectWords.setTransitionInAnimator(CommonTransitions.createEmpty());
-	    formCorrectWords.addShowListener(new ActionListener() {
+	    formCorrectWords.addShowListener(new ActionListener<ActionEvent>() {
 	        @Override
 	        public void actionPerformed(ActionEvent evt) {
 	            formCorrectWords.setTransitionOutAnimator(originalOut);
@@ -504,4 +504,3 @@ public class ClassCorrectWord {
 	}
 
 }
-

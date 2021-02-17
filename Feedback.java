@@ -1,18 +1,15 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import com.codename1.charts.ChartComponent;
 import com.codename1.charts.models.CategorySeries;
-import com.codename1.charts.models.MultipleCategorySeries;
 import com.codename1.charts.renderers.DefaultRenderer;
 import com.codename1.charts.renderers.SimpleSeriesRenderer;
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.charts.views.DoughnutChart;
 import com.codename1.charts.views.PieChart;
 import com.codename1.components.SpanLabel;
-import com.codename1.io.Preferences;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
 import com.codename1.ui.Button;
@@ -20,15 +17,12 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
-import com.codename1.ui.Form;
 import com.codename1.ui.Image;
-import com.codename1.ui.Label;
-import com.codename1.ui.TextArea;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 
-class ClassFeedback {
+class Feedback {
 	
 	public Button buttonDialog = new Button("repetir");
 	public Button buttonHome = new Button("início");
@@ -37,13 +31,13 @@ class ClassFeedback {
 	private Container containerGraph = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 	private Dialog dialogFinal = new Dialog(new BorderLayout());
 	private Dialog dialogExplain = new Dialog(new BorderLayout());
-	private ClassInputArrays inputArrays = new ClassInputArrays();
+	private InputArrays inputArrays = new InputArrays();
 	private SpanLabel spanLabelDialogFeedback = new SpanLabel();
 	private Image imageLabel;
 	private int index;
 
 	
-	public void dialogExplainFrases (ClassPojos cp) throws IOException {
+	public void dialogExplainFrases (Pojos cp) throws IOException {
 		
 		commons();
 		
@@ -65,7 +59,7 @@ class ClassFeedback {
 	
 	
 	
-	public void dialogFinal (ClassPojos cp) throws IOException {
+	public void dialogFinal (Pojos cp) throws IOException {
 		
 		buttonDialog = new Button("repetir");
 		buttonHome = new Button("início");
@@ -144,7 +138,7 @@ class ClassFeedback {
 		
 	}	
 	
-	public void createPieChartForm(ClassPojos cp) {
+	public void createPieChartForm(Pojos cp) {
 		
 		int cor = cp.getintCorrects();
 		int fal = cp.getintFalse();

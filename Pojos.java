@@ -1,11 +1,8 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.util.ArrayList;
 
-import com.codename1.io.Preferences;
-import com.codename1.util.Wrapper;
-
-public class ClassPojos {
+public class Pojos {
 
 	private ArrayList <String> listDialog; 
 	private String stringOneCw;
@@ -22,7 +19,7 @@ public class ClassPojos {
 	private int intTotal;
 	
 	
-	public ClassPojos() {
+	public Pojos() {
 		
 		listDialog = new ArrayList<String>();
 		stringOneCw = "";

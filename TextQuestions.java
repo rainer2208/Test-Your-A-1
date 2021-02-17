@@ -1,11 +1,11 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
+
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.components.InteractionDialog;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanButton;
 import com.codename1.components.SpanLabel;
@@ -32,7 +32,7 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UITimer;
 
-public class ClassTextQuestions extends Form {
+public class TextQuestions extends Form {
 	
 	private Button buttonDialogAgain;
 	private Button buttonDialogHome;
@@ -40,9 +40,9 @@ public class ClassTextQuestions extends Form {
 	private Button buttonInformation;
 	private Button buttonNext;
 	private Button buttonOk;
-	private ClassFirstRunDialogs cfd = new ClassFirstRunDialogs ();
-	private ClassInputArrays classInputArrays = new ClassInputArrays();
-	private ClassPojos classPojos = new ClassPojos();
+	private FirstRunDialogs cfd = new FirstRunDialogs ();
+	private InputArrays inputArrays = new InputArrays();
+	private Pojos pojos = new Pojos();
 	private Container containerButtons;
 	private Container containerNext;
 	private Form formTextQuestions = new Form(new BoxLayout(BoxLayout.Y_AXIS));
@@ -61,13 +61,13 @@ public class ClassTextQuestions extends Form {
 	private Slider sliderFalse;
 	private Toolbar toolbar = formTextQuestions.getToolbar();
 	
-	public ClassTextQuestions(Form formBack, ClassPojos2 classPojos2, Label label) throws IOException {
+	public TextQuestions(Form formBack, Pojos2 pojos2, Label label) throws IOException {
 
 		// Back command
 	    Command back = new Command("A") {
 	        @Override
 	        public void actionPerformed(ActionEvent evt) {
-	        	label.setText(classPojos2.getintLabelCount() + "/ 95");
+	        	label.setText(pojos2.getintLabelCount() + "/ 95");
 	        	formBack.showBack();
 	        }
 	    }; 
@@ -78,24 +78,24 @@ public class ClassTextQuestions extends Form {
 			public void run() {		
 				if (Preferences.get("FirstRunQuestions",0) == 0) {		
 					formTextQuestions.scrollComponentToVisible(buttonOk);
-					dialogFirstRunStart(classPojos);
+					dialogFirstRunStart(pojos);
 				}
 			}
 		});
 		timer.schedule(500,false,formTextQuestions);
 	    
 	    // Load lists 
-	    classInputArrays.consolidatedLists();
+	    inputArrays.consolidatedLists();
 	    
 	    // Readingtext-label
 		if (indexNext > 10) {			
-			spanLabelText.setText(classInputArrays.listReadingTexts.get(1));			
+			spanLabelText.setText(inputArrays.listReadingTexts.get(1));			
 		} else {
-			spanLabelText.setText(classInputArrays.listReadingTexts.get(0));
+			spanLabelText.setText(inputArrays.listReadingTexts.get(0));
 		}	    
 	    
 	    // Question label
-	    labelQuestion.setText(classInputArrays.listReadingQuestions.get(indQuestions));
+	    labelQuestion.setText(inputArrays.listReadingQuestions.get(indQuestions));
 	    
 	    // Pull container with option-buttons
 	    containerOptions();
@@ -104,7 +104,7 @@ public class ClassTextQuestions extends Form {
 	    formTextQuestions.add(spanLabelText);
 		formTextQuestions.add(new Container().add(FlowLayout.encloseLeftMiddle(labelQuestion)));
 	    formTextQuestions.add(containerButtons);
-	    formTextQuestions.add(ClassButtonContainer.containerMenu());
+	    formTextQuestions.add(ButtonContainer.containerMenu());
 	    formTextQuestions.add(labelDummy);
 	   
 	    styles();
@@ -112,34 +112,34 @@ public class ClassTextQuestions extends Form {
 	    formTextQuestions.show();
 
 	   
-	    buttonActions(formBack, classPojos2, label);
+	    buttonActions(formBack, pojos2, label);
 		
 	    
 	}
 	
-	public void buttonActions (Form formBack, ClassPojos2 classPojos2, Label label) {
+	public void buttonActions (Form formBack, Pojos2 classPojos2, Label label) {
 				
 		// Button Information explains the mmatter
-		buttonInformation = ClassButtonContainer.getButtonInfromation();
+		buttonInformation = ButtonContainer.getButtonInfromation();
 		buttonInformation.addActionListener(l->{
 			try {
-				classPojos.setintTotal(indQuestions);
-				classPojos.setDialogList(classInputArrays.listReadingExplanation);
-				new ClassFeedback().dialogExplainFrases(classPojos);
+				pojos.setintTotal(indQuestions);
+				pojos.setDialogList(inputArrays.listReadingExplanation);
+				new Feedback().dialogExplainFrases(pojos);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 		
 		// Button next frame
-		buttonNext = ClassButtonContainer.getButtonNext();
+		buttonNext = ButtonContainer.getButtonNext();
 		buttonNext.addActionListener(l->{
 			
-			if (indexNext == classInputArrays.listReadingTextControls.size()) {
+			if (indexNext == inputArrays.listReadingTextControls.size()) {
 				
 				try {
-					ClassFeedback cf = new ClassFeedback();
-					cf.dialogFinal(classPojos);
+					Feedback cf = new Feedback();
+					cf.dialogFinal(pojos);
 					buttonDialogHome = cf.getButtonDialogHome();
 					buttonDialogAgain = cf.getButtonDialogRepeat();
 					buttonDialogActions(formBack, classPojos2, label);
@@ -156,10 +156,10 @@ public class ClassTextQuestions extends Form {
 					+ Preferences.get("FrasesCorrectAnswers",0) + sliderCorrect.getProgress();
 					classPojos2.setintLabelCount(intLabelCount);
 					
-					Preferences.set("IndexQuestions",classPojos.getintTotal());
-					Preferences.set("QuestionsCorrectAnswers",classPojos.getintCorrects());
-					Preferences.set("QuestionsFalseAnswers",classPojos.getintFalse());
-					new ClassTextQuestions(formBack, classPojos2, label);
+					Preferences.set("IndexQuestions",pojos.getintTotal());
+					Preferences.set("QuestionsCorrectAnswers",pojos.getintCorrects());
+					Preferences.set("QuestionsFalseAnswers",pojos.getintFalse());
+					new TextQuestions(formBack, classPojos2, label);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -168,7 +168,7 @@ public class ClassTextQuestions extends Form {
 		});
 		
 		// Button Ok
-		buttonOk = ClassButtonContainer.getButtonOk();
+		buttonOk = ButtonContainer.getButtonOk();
 		buttonOk.addActionListener(l->{
 			
 			buttonOk.setEnabled(false);
@@ -189,10 +189,10 @@ public class ClassTextQuestions extends Form {
 				timer.schedule(500,false,formTextQuestions);
 			}
 			
-			classPojos.setintTotal(indexNext);
+			pojos.setintTotal(indexNext);
 			
-			String stringPojo = classPojos.getStringControlTextQuestions().trim();
-			String stringControl = classInputArrays.listReadingTextControls.get(indQuestions).trim();
+			String stringPojo = pojos.getStringControlTextQuestions().trim();
+			String stringControl = inputArrays.listReadingTextControls.get(indQuestions).trim();
 						
 			for (Component component : containerButtons) {
 				
@@ -201,26 +201,26 @@ public class ClassTextQuestions extends Form {
 				if (stringPojo.equals(stringControl) && component.getName().equals("Clicked")) {
 					try {						
 						// set feedback sound okay
-						new ClassFeedback().soundCorrect(media,inputStream);
+						new Feedback().soundCorrect(media,inputStream);
 						// set background color of button
 						component.setUIID("QuestionsButtonChoiceCorrect");					
 						// set slider value
 						sliderCorrect.setText(String.valueOf(Preferences.get("QuestionsCorrectAnswers",0)+1));
 						sliderCorrect.setProgress(Preferences.get("QuestionsCorrectAnswers",0)+1);
 						// pass both slider values to next button
-						classPojos.setintCorrects(Integer.valueOf(sliderCorrect.getText()));
-						classPojos.setintFalse(Integer.valueOf(sliderFalse.getText()));						
+						pojos.setintCorrects(Integer.valueOf(sliderCorrect.getText()));
+						pojos.setintFalse(Integer.valueOf(sliderFalse.getText()));						
 					} catch (IOException e) {
 						e.printStackTrace();
 					}					
 				} else if (stringPojo != stringControl && component.getName().equals("Clicked")){
 					try {
-						new ClassFeedback().soundInCorrect(media,inputStream);
+						new Feedback().soundInCorrect(media,inputStream);
 						component.setUIID("QuestionsButtonChoiceFalse");
 						sliderFalse.setText(String.valueOf(Preferences.get("QuestionsFalseAnswers",0)+1));
 						sliderFalse.setProgress(Preferences.get("QuestionsFalseAnswers",0)+1);
-						classPojos.setintCorrects(Integer.valueOf(sliderCorrect.getText()));
-						classPojos.setintFalse(Integer.valueOf(sliderFalse.getText()));		
+						pojos.setintCorrects(Integer.valueOf(sliderCorrect.getText()));
+						pojos.setintFalse(Integer.valueOf(sliderFalse.getText()));		
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -230,33 +230,33 @@ public class ClassTextQuestions extends Form {
 		});
 		
 		// Button again
-		buttonAgain = ClassButtonContainer.getButtonAgain();
+		buttonAgain = ButtonContainer.getButtonAgain();
 		buttonAgain.addActionListener(l->{		
 			try {
-				new ClassTextQuestions(formBack, classPojos2, label);
+				new TextQuestions(formBack, classPojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 		
 		// Label indicator of number of current question 
-		labelCount = ClassButtonContainer.getLabelCount();
-		labelCount.setText(Integer.toString(indexNext) + "/ "  + classInputArrays.listReadingTextControls.size());
+		labelCount = ButtonContainer.getLabelCount();
+		labelCount.setText(Integer.toString(indexNext) + "/ "  + inputArrays.listReadingTextControls.size());
 		
 		// sliders		
-		sliderCorrect = ClassButtonContainer.getSliderCorrect();
+		sliderCorrect = ButtonContainer.getSliderCorrect();
 		sliderCorrect.setText(String.valueOf(Preferences.get("QuestionsCorrectAnswers",0)));
 		sliderCorrect.setProgress(Preferences.get("QuestionsCorrectAnswers",0));
 		sliderCorrect.setMaxValue(25);
 		
-		sliderFalse = ClassButtonContainer.geSliderFalse();
+		sliderFalse = ButtonContainer.geSliderFalse();
 		sliderFalse.setText(String.valueOf(Preferences.get("QuestionsFalseAnswers",0)));
 		sliderFalse.setProgress(Preferences.get("QuestionsFalseAnswers",0));
 		sliderFalse.setMaxValue(25);
 		
 	}
 	
-	public void buttonDialogActions(Form formBack, ClassPojos2 classPojos2, Label label) {
+	public void buttonDialogActions(Form formBack, Pojos2 pojos2, Label label) {
 		
 		// Button dialog again 
 		buttonDialogAgain.addActionListener(l-> {					
@@ -264,7 +264,7 @@ public class ClassTextQuestions extends Form {
 				Preferences.set("IndexQuestions",0);
 				Preferences.set("QuestionsCorrectAnswers",0);
 				Preferences.set("QuestionsFalseAnswers",0);
-				new ClassTextQuestions(formBack, classPojos2, label);
+				new TextQuestions(formBack, pojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}					
@@ -276,7 +276,7 @@ public class ClassTextQuestions extends Form {
 				Preferences.set("IndexQuestions",0);
 				Preferences.set("QuestionsCorrectAnswers",0);
 				Preferences.set("QuestionsFalseAnswers",0);
-				new ClassStartScreen().startScreen(classPojos, classPojos2);
+				new StartScreen().startScreen(pojos, pojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -286,7 +286,7 @@ public class ClassTextQuestions extends Form {
 	
 	public void containerOptions() {
 		
-		List<String> listOption = classInputArrays.listReadingButtons.get(indQuestions);
+		List<String> listOption = inputArrays.listReadingButtons.get(indQuestions);
 		Collections.shuffle(listOption);
 		
 		containerButtons = new Container(new GridLayout(2,2));
@@ -315,7 +315,7 @@ public class ClassTextQuestions extends Form {
 					}
 				}
 				// get button text to compare with control string
-				classPojos.setStringControlTextQuestions(button.getText());
+				pojos.setStringControlTextQuestions(button.getText());
 				// enable Ok button
 				buttonOk.setEnabled(true);
 				
@@ -329,7 +329,7 @@ public class ClassTextQuestions extends Form {
 	
 	}
 	
-	public void dialogFirstRunStart (ClassPojos classPojos) {
+	public void dialogFirstRunStart (Pojos pojos) {
 
 		UITimer timerTwo = new UITimer(new Runnable() {			
 				@Override
@@ -341,10 +341,10 @@ public class ClassTextQuestions extends Form {
 					// Make form unscrollable until dialog is closed
 //					formTextQuestions.setScrollableY(false);
 					// Set dialog text and disable preference 
-					classPojos.setStringFirstRun("Leia o texto acima e responda às perguntas clicando nos botões .... ");
-					classPojos.setStringPreferences("FirstRunQuestions");
+					pojos.setStringFirstRun("Leia o texto acima e responda às perguntas clicando nos botões .... ");
+					pojos.setStringPreferences("FirstRunQuestions");
 					// Call first run dialog
-					cfd.dialogFirstRunStart(classPojos, formTextQuestions);
+					cfd.dialogFirstRunStart(pojos, formTextQuestions);
 					// Call avtivation constructor
 					cfd.enableStart(containerButtons);
 					// Create interaction dialog
@@ -358,13 +358,13 @@ public class ClassTextQuestions extends Form {
 	
 	public void dialogFirstRunButtonOk() {
 		
-		cfd.firstRunOK(null , this, classPojos, buttonOk , formTextQuestions);
+		cfd.firstRunOK(null , this, pojos, buttonOk , formTextQuestions);
 		
 		UITimer timerThree = new UITimer(new Runnable() {			
 			@Override
 			public void run() {		
 
-				classPojos.setStringPreferences("FirstRunButtonsQuestions");
+				pojos.setStringPreferences("FirstRunButtonsQuestions");
 			
 				Dialog dialog = cfd.getDialogStart();
 				dialog.showPopupDialog(buttonOk);	
@@ -377,15 +377,15 @@ public class ClassTextQuestions extends Form {
 	
 	public void dialogFirstNext () throws IOException {
 		// Disable components until dialog is  closed
-		for (Component component : ClassButtonContainer.containerButtonNext) {
+		for (Component component : ButtonContainer.containerButtonNext) {
 			component.setEnabled(false);
 		}
 		// Inform wether container  is imported 
-		classPojos.setStringFirstRun("imported container");
+		pojos.setStringFirstRun("imported container");
 		// Set preference to disable dialog
-		classPojos.setStringPreferences("FirstRunNext");
+		pojos.setStringPreferences("FirstRunNext");
 		// Call first run dialog
-		cfd.firstRunNext(classPojos, buttonInformation, buttonNext, buttonAgain, containerNext);
+		cfd.firstRunNext(pojos, buttonInformation, buttonNext, buttonAgain, containerNext);
 		Dialog dialog = cfd.getDialogNext();
 		dialog.showPopupDialog(buttonAgain);	
 		buttonOk.setEnabled(false);
@@ -422,7 +422,7 @@ public class ClassTextQuestions extends Form {
 		toolbar.getAllStyles().setBorder(Border.createEmpty());	
 		toolbar.getAllStyles().setPadding(0, 0, 0, 0);
 		
-		containerNext = ClassButtonContainer.getContainerNext();
+		containerNext = ButtonContainer.getContainerNext();
 		containerNext.getAllStyles().setMargin(40,100,0,0);
 		
 	}

@@ -1,4 +1,4 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.codename1.charts.util.ColorUtil;
-import com.codename1.components.InteractionDialog;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.Preferences;
@@ -32,7 +31,7 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UITimer;
 
-public class ClassFrases extends Form {
+public class Frases extends Form {
 
 	private Button buttonAgain;
 	private Button buttonDialogAgain;
@@ -40,17 +39,17 @@ public class ClassFrases extends Form {
 	private Button buttonInformation;
 	private Button buttonNext;
 	private Button buttonOk;
-	private ClassPojos classPojos = new ClassPojos();
-	private ClassFirstRunDialogs classFirstRunDialogs = new ClassFirstRunDialogs();
-	private ClassInputArrays classInputArrays = new ClassInputArrays();
+	private Pojos pojos = new Pojos();
+	private FirstRunDialogs firstRunDialogs = new FirstRunDialogs();
+	private InputArrays inputArrays = new InputArrays();
 	private Container containerOptions = new Container(new BorderLayout());
 	private Container containerButtons = new Container();
 	private Container containerDummy = new Container();
 	private Image imageTop;
 	private int fontSize = Display.getInstance().getDisplayHeight();
 	private Font redHatFont = Font.createTrueTypeFont("Red Hat Text Regular", "RedHatText-Regular.ttf").derive(fontSize/40, Font.STYLE_PLAIN); // 30
-	private Font redHatFontRadio = Font.createTrueTypeFont("Red Hat Text Regular", "RedHatText-Regular.ttf").derive(fontSize/45, Font.STYLE_PLAIN); // 35
-	private Font redHatFontRadioPressed = Font.createTrueTypeFont("Red Hat Text Regular", "RedHatText-Regular.ttf").derive(fontSize/42, Font.STYLE_PLAIN); // 33
+	//private Font redHatFontRadio = Font.createTrueTypeFont("Red Hat Text Regular", "RedHatText-Regular.ttf").derive(fontSize/45, Font.STYLE_PLAIN); // 35
+	//private Font redHatFontRadioPressed = Font.createTrueTypeFont("Red Hat Text Regular", "RedHatText-Regular.ttf").derive(fontSize/42, Font.STYLE_PLAIN); // 33
 	private Form formFrases =  new Form(new BoxLayout(BoxLayout.Y_AXIS));
 	private Label labelCount; 
 	private InputStream inputStream;
@@ -65,13 +64,13 @@ public class ClassFrases extends Form {
 	
 	private Toolbar toolbar = formFrases.getToolbar();
 	
-	public ClassFrases (Form formBack, ClassPojos2 classPojos2, Label label) throws IOException {
+	public Frases (Form formBack, Pojos2 pojos2, Label label) throws IOException {
 		
 	    Command back = new Command("A") {
 	        @Override
 	        public void actionPerformed(ActionEvent evt) {
 	        	
-	        	label.setText(classPojos2.getintLabelCount() + "/ 95");
+	        	label.setText(pojos2.getintLabelCount() + "/ 95");
 	        	formBack.showBack();
 	        }
 	    }; 
@@ -84,22 +83,22 @@ public class ClassFrases extends Form {
 		}
 		
 		formFrases.add(labelQuery).add(containerOptions)
-		.add(ClassButtonContainer.containerMenu()).add(containerDummy);
+		.add(ButtonContainer.containerMenu()).add(containerDummy);
 
 	    initialLoads();
 	    containerOptions();
 	    spanLabelSettings();
-	    buttonActions(formBack, classPojos2, label);
+	    buttonActions(formBack, pojos2, label);
 		styles();
 
 		formFrases.show();
 	};
 	
-	public void buttonActions(Form formBack, ClassPojos2 classPojos2, Label label) {
+	public void buttonActions(Form formBack, Pojos2 classPojos2, Label label) {
 		
 		buttonAgain.addActionListener(l-> {
 			try {
-				new ClassFrases(formBack, classPojos2, label);
+				new Frases(formBack, classPojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -108,10 +107,10 @@ public class ClassFrases extends Form {
 		buttonInformation.addActionListener(l -> {
 
 			try {
-				ArrayList <String> listDialog = classInputArrays.listFrasesExplanation;
-				classPojos.setDialogList(listDialog);
-				classPojos.setintTotal(indexFrases);
-				new ClassFeedback().dialogExplainFrases(classPojos);
+				ArrayList <String> listDialog = inputArrays.listFrasesExplanation;
+				pojos.setDialogList(listDialog);
+				pojos.setintTotal(indexFrases);
+				new Feedback().dialogExplainFrases(pojos);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -126,12 +125,12 @@ public class ClassFrases extends Form {
 					int corrects = sliderCorrect.getProgress();
 					int falses = sliderFalse.getProgress();
 
-					classPojos.setintTotal(indexTotal);
-					classPojos.setintCorrects(corrects);
-					classPojos.setintFalse(falses);
+					pojos.setintTotal(indexTotal);
+					pojos.setintCorrects(corrects);
+					pojos.setintFalse(falses);
 
-					ClassFeedback cf = new ClassFeedback();
-					cf.dialogFinal(classPojos);
+					Feedback cf = new Feedback();
+					cf.dialogFinal(pojos);
 					buttonDialogAgain = cf.getButtonDialogRepeat();
 					buttonDialogHome = cf.getButtonDialogHome();
 					buttonActionsDialog(formBack, classPojos2, label);
@@ -146,10 +145,10 @@ public class ClassFrases extends Form {
 					+ sliderCorrect.getProgress() + Preferences.get("QuestionsCorrectAnswers",0);
 					classPojos2.setintLabelCount(intLabelCount);
 					
-					Preferences.set("FrasesCorrectAnswers",classPojos.getintCorrects());
-					Preferences.set("FrasesFalseAnswers",classPojos.getintFalse());
+					Preferences.set("FrasesCorrectAnswers",pojos.getintCorrects());
+					Preferences.set("FrasesFalseAnswers",pojos.getintFalse());
 					Preferences.set("IndexFrases",indexNext);
-					new ClassFrases(formBack, classPojos2, label);
+					new Frases(formBack, classPojos2, label);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -175,14 +174,14 @@ public class ClassFrases extends Form {
 		
 	}
 	
-	public void buttonActionsDialog (Form formBack, ClassPojos2 classPojos2, Label label) {
+	public void buttonActionsDialog (Form formBack, Pojos2 classPojos2, Label label) {
 		
 		buttonDialogAgain.addActionListener(l-> {
 			try {
 				Preferences.set("IndexFrases",0); 
 				Preferences.set("FrasesCorrectAnswers",0);
 				Preferences.set("FrasesFalseAnswers" , 0);
-				new ClassFrases(formBack, classPojos2, label);
+				new Frases(formBack, classPojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -194,7 +193,7 @@ public class ClassFrases extends Form {
 				Preferences.set("IndexFrases",0); 
 				Preferences.set("FrasesCorrectAnswers",0);
 				Preferences.set("FrasesFalseAnswers" , 0);
-				new ClassStartScreen().startScreen(classPojos, classPojos2);
+				new StartScreen().startScreen(pojos, classPojos2);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -210,16 +209,16 @@ public class ClassFrases extends Form {
 			component.setEnabled(false);
 		}
 		
-		classFirstRunDialogs.firstRunOK(this, null , classPojos, buttonOk, formFrases);
+		firstRunDialogs.firstRunOK(this, null , pojos, buttonOk, formFrases);
 		
 		UITimer timer = new UITimer(new Runnable() {
 
 			@Override
 			public void run() {
 				
-				classPojos.setStringPreferences("FirstRunFrasesRadio");
+				pojos.setStringPreferences("FirstRunFrasesRadio");
 				
-				Dialog dialog = classFirstRunDialogs.getDialogStart();
+				Dialog dialog = firstRunDialogs.getDialogStart();
 				dialog.showPopupDialog(buttonOk);	
 				
 			}
@@ -242,14 +241,14 @@ public class ClassFrases extends Form {
 				// Make form unscrollable until dialog is closed
 //				formFrases.setScrollableY(false);
 				// Set dialog text and disable preference 
-				classPojos.setStringFirstRun("Escolha embaixo uma resposta para esta pergunta .... ");
-				classPojos.setStringPreferences("FirstRunFrasesStart");
+				pojos.setStringFirstRun("Escolha embaixo uma resposta para esta pergunta .... ");
+				pojos.setStringPreferences("FirstRunFrasesStart");
 				// Call first run dialog
-				classFirstRunDialogs.dialogFirstRunStart(classPojos, formFrases);
+				firstRunDialogs.dialogFirstRunStart(pojos, formFrases);
 				// Call avtivation constructor
-				classFirstRunDialogs.enableStart(containerButtons);
+				firstRunDialogs.enableStart(containerButtons);
 				// Create interaction dialog				
-				Dialog dialog = classFirstRunDialogs.getDialogStart();
+				Dialog dialog = firstRunDialogs.getDialogStart();
 				dialog.setDisposeWhenPointerOutOfBounds(false);
 				dialog.showPopupDialog(labelQuery);
 
@@ -262,21 +261,21 @@ public class ClassFrases extends Form {
 	
 	public void dialogFirstRunNext () throws IOException {
 		// Disable components until dialog is  closed
-		for (Component component : ClassButtonContainer.containerButtonNext) {
+		for (Component component : ButtonContainer.containerButtonNext) {
 			component.setEnabled(false);
 		}
 		// Inform wether container  is imported 
-		classPojos.setStringFirstRun("imported container");
+		pojos.setStringFirstRun("imported container");
 		// Set preference to disable dialog 
-		classPojos.setStringPreferences("FirstRunNext");
+		pojos.setStringPreferences("FirstRunNext");
 		// Call first run dialog
-		classFirstRunDialogs.firstRunNext(classPojos, buttonInformation, buttonNext, buttonAgain, containerButtons);
-		Dialog dialog = classFirstRunDialogs.getDialogNext();
+		firstRunDialogs.firstRunNext(pojos, buttonInformation, buttonNext, buttonAgain, containerButtons);
+		Dialog dialog = firstRunDialogs.getDialogNext();
 		dialog.showPopupDialog(buttonAgain);
 		for (Component component : containerOptions) {
 			component.setEnabled(false);
 		}		
-		for (Component component : ClassButtonContainer.containerButtonNext) {
+		for (Component component : ButtonContainer.containerButtonNext) {
 			component.setEnabled(true);
 		}
 		buttonOk.setEnabled(false);
@@ -284,30 +283,30 @@ public class ClassFrases extends Form {
 	
 	public void initialLoads() throws IOException {
 		
-		buttonAgain = ClassButtonContainer.getButtonAgain();
+		buttonAgain = ButtonContainer.getButtonAgain();
 
-		buttonInformation = ClassButtonContainer.getButtonInfromation();
-		buttonOk = ClassButtonContainer.getButtonOk();
-		buttonNext = ClassButtonContainer.getButtonNext();
-		classInputArrays.consolidatedLists();
+		buttonInformation = ButtonContainer.getButtonInfromation();
+		buttonOk = ButtonContainer.getButtonOk();
+		buttonNext = ButtonContainer.getButtonNext();
+		inputArrays.consolidatedLists();
 		
-		indexTotal = classInputArrays.listFrasescontrolStrings.size();
+		indexTotal = inputArrays.listFrasescontrolStrings.size();
 
 		imageTop = Image.createImage("/germany.jpeg");
 		toolbar.add(BorderLayout.CENTER,scaleImageLabel);
 		
 		int indexNext = Preferences.get("IndexFrases",0) + 1;
-		labelCount = ClassButtonContainer.getLabelCount();
+		labelCount = ButtonContainer.getLabelCount();
 		labelCount.setText(Integer.toString(indexNext) + "/ "  + indexTotal);
 		
-		sliderCorrect = ClassButtonContainer.getSliderCorrect();
+		sliderCorrect = ButtonContainer.getSliderCorrect();
 		sliderCorrect.setText(String.valueOf(Preferences.get("FrasesCorrectAnswers",0)));
 		sliderCorrect.setEditable(false);
 		sliderCorrect.setMinValue(0);
 		sliderCorrect.setMaxValue(indexTotal);
 		sliderCorrect.setProgress(Preferences.get("FrasesCorrectAnswers",0));
 		
-		sliderFalse = ClassButtonContainer.geSliderFalse();	
+		sliderFalse = ButtonContainer.geSliderFalse();	
 		sliderFalse.setText(String.valueOf(Preferences.get("FrasesFalseAnswers",0)));
 		sliderFalse.setEditable(false);
 		sliderFalse.setMinValue(0);
@@ -318,14 +317,14 @@ public class ClassFrases extends Form {
 	public void containerOptions () {
 		
 		// Get display height for margins and padding
-		int height = Display.getInstance().getDisplayHeight();
+		// int height = Display.getInstance().getDisplayHeight();
 
 		// Create radio container
 		containerButtons = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 		containerButtons.setUIID("FraseContainerOptions");
 		
 		// Populate radio container
-		List<String> listOption = classInputArrays.listFrasesOption.get(indexFrases);
+		List<String> listOption = inputArrays.listFrasesOption.get(indexFrases);
 		Collections.shuffle(listOption);
 		
 		for (String string : listOption) {
@@ -338,7 +337,7 @@ public class ClassFrases extends Form {
 		    
 		    radioButton.addActionListener(l-> {
 		    	// Enable ok-button
-		    	ClassButtonContainer.buttonOk.setEnabled(true);
+		    	ButtonContainer.buttonOk.setEnabled(true);
 		    	// disable ok buttton until first run dialog is deactivated
 		    	if (Preferences.get("FirstRunFrasesRadio",0) == 0) {	
 		    		formFrases.scrollComponentToVisible(buttonAgain);
@@ -346,36 +345,36 @@ public class ClassFrases extends Form {
 				}	
 		    	// pass string for checking
 		    	String stringText = radioButton.getText();
-		    	classPojos.setStringRadioFrases(stringText);
+		    	pojos.setStringRadioFrases(stringText);
 		    });
 		    
 		    buttonOk.addActionListener(l -> {
 		    			    	
-		    	String stringRadio = classPojos.getStringRadioFrases().trim();
-				String stringControl = classInputArrays.listFrasescontrolStrings.get(indexFrases);
+		    	String stringRadio = pojos.getStringRadioFrases().trim();
+				String stringControl = inputArrays.listFrasescontrolStrings.get(indexFrases);
 		    	radioButton.setEnabled(false);
 		    	boolean selected = radioButton.isSelected();
 		    	if (selected == true && stringRadio.equals(stringControl)) {
-		    		classPojos.setintCorrects(Preferences.get("FrasesCorrectAnswers",0) + 1);
-		    		classPojos.setintFalse(Preferences.get("FrasesFalseAnswers",0));
+		    		pojos.setintCorrects(Preferences.get("FrasesCorrectAnswers",0) + 1);
+		    		pojos.setintFalse(Preferences.get("FrasesFalseAnswers",0));
 		    		sliderCorrect.setText(String.valueOf(Preferences.get("FrasesCorrectAnswers",0) + 1));
 		    		sliderCorrect.setProgress(Preferences.get("FrasesCorrectAnswers",0) + 1);
 		    		// Styles
 		    		radioButton.setUIID("FrasesRadioRight");
 					try {
-						new ClassFeedback().soundCorrect(media, inputStream);
+						new Feedback().soundCorrect(media, inputStream);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else if (selected == true && stringRadio != stringControl) {
-					classPojos.setintFalse(Preferences.get("FrasesFalseAnswers",0) + 1);
-					classPojos.setintCorrects(Preferences.get("FrasesCorrectAnswers",0));
+					pojos.setintFalse(Preferences.get("FrasesFalseAnswers",0) + 1);
+					pojos.setintCorrects(Preferences.get("FrasesCorrectAnswers",0));
 					sliderFalse.setText(String.valueOf(Preferences.get("FrasesFalseAnswers",0) + 1));
 		    		sliderFalse.setProgress(Preferences.get("FrasesFalseAnswers",0) + 1);
 		    		// Styles
 		    		radioButton.setUIID("FrasesRadioWrong");
 					try {
-						new ClassFeedback().soundInCorrect(media, inputStream);
+						new Feedback().soundInCorrect(media, inputStream);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -397,7 +396,7 @@ public class ClassFrases extends Form {
 		Display.getInstance().lockOrientation(true);
 		int displayHeight = Display.getInstance().getDisplayHeight();
 		
-		Container containerNext = ClassButtonContainer.getContainerNext();
+		Container containerNext = ButtonContainer.getContainerNext();
 		containerNext.getAllStyles().setMargin(40,100,0,0);
 		
 		labelQuery.setUIID("FrasesLabelQuery");
@@ -424,13 +423,8 @@ public class ClassFrases extends Form {
 	
 	public void spanLabelSettings() {
 		
-		String stringLabel = classInputArrays.listFrasesHeaders.get(indexFrases);
+		String stringLabel = inputArrays.listFrasesHeaders.get(indexFrases);
 		labelQuery.setText(stringLabel);
 	}
-	
-
-	
-	
-	
 
 }

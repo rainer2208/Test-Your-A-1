@@ -1,4 +1,4 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UITimer;
 
-public class ClassStartScreen {
+public class StartScreen {
 	
 	private Button buttonCorrectWord = new Button();
 	private Button buttonImage = new Button();
@@ -43,10 +43,10 @@ public class ClassStartScreen {
 	private Toolbar toolbar = formStart.getToolbar();
 	
 
-	public void startScreen(ClassPojos classPojos , ClassPojos2 classPojos2 ) throws IOException {
+	public void startScreen(Pojos pojos , Pojos2 pojos2 ) throws IOException {
 		
-		firstRunDialog(classPojos);
-		firstRunDialogSideMenu(classPojos);
+		firstRunDialog(pojos);
+		firstRunDialogSideMenu(pojos);
 		preferences();
 		sideMenu();
 
@@ -56,7 +56,7 @@ public class ClassStartScreen {
 		((BorderLayout)formStart.getLayout()).setCenterBehavior(BorderLayout.CENTER_BEHAVIOR_CENTER);
 		containerButton.add(buttonCorrectWord).add(buttonFrases).add(buttonTextQuestions).add(buttonFour);
 
-		labelCount.setText(classPojos2.getintLabelCount() + " /95");
+		labelCount.setText(pojos2.getintLabelCount() + " /95");
 		
 		// Put everything together 
 		formStart.add(BorderLayout.NORTH, containerDummy);
@@ -67,7 +67,7 @@ public class ClassStartScreen {
 		// Button actions
 		buttonCorrectWord.addActionListener( l -> {
 			try {
-				new ClassCorrectWord().correctWords(formStart, labelCount, classPojos2);
+				new CorrectWord().correctWords(formStart, labelCount, pojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -76,7 +76,7 @@ public class ClassStartScreen {
 		buttonFrases.addActionListener( l -> {
 			
 			try {
-				new ClassFrases(formStart, classPojos2,labelCount);
+				new Frases(formStart, pojos2,labelCount);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -86,7 +86,7 @@ public class ClassStartScreen {
 		buttonTextQuestions.addActionListener( l -> {
 			
 			try {
-				new ClassTextQuestions(formStart, classPojos2, labelCount);
+				new TextQuestions(formStart, pojos2, labelCount);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -97,7 +97,7 @@ public class ClassStartScreen {
 		buttonFour.addActionListener( l -> {
 						
 			try {
-				new ClassCrossWords(formStart, classPojos2, labelCount);
+				new CrossWords(formStart, pojos2, labelCount);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
@@ -109,7 +109,7 @@ public class ClassStartScreen {
 		
 	}
 	
-	public void firstRunDialog (ClassPojos classPojos) {
+	public void firstRunDialog (Pojos classPojos) {
 		
 		if (Preferences.get("FirstRunStart",0) == 0) {
 			
@@ -120,7 +120,7 @@ public class ClassStartScreen {
 					classPojos.setStringFirstRun("first run start screen");
 					classPojos.setStringPreferences("FirstRunStart");
 					
-					ClassFirstRunDialogs cfd = new ClassFirstRunDialogs();
+					FirstRunDialogs cfd = new FirstRunDialogs();
 					cfd.dialogFirstRunStart(classPojos, formStart);
 					cfd.enableStart(containerButton);
 					
@@ -135,7 +135,7 @@ public class ClassStartScreen {
 		
 	}
 	
-	public void firstRunDialogSideMenu (ClassPojos classPojos) {
+	public void firstRunDialogSideMenu (Pojos classPojos) {
 		
 		if (Preferences.get("FirstRunStartSideMenu",0) == 0) {
 			
@@ -146,7 +146,7 @@ public class ClassStartScreen {
 					classPojos.setStringFirstRun("first run side menu");
 					classPojos.setStringPreferences("FirstRunStartSideMenu");
 					
-					ClassFirstRunDialogs cfd = new ClassFirstRunDialogs();
+					FirstRunDialogs cfd = new FirstRunDialogs();
 					cfd.dialogFirstRunStart(classPojos, formStart);
 					
 					Dialog dialog = cfd.getDialogStart();
@@ -297,14 +297,14 @@ public class ClassStartScreen {
 			containerDialogBase.add(BorderLayout.CENTER, textArea);
 	        containerDialogBase.add(BorderLayout.SOUTH,new Container(new BorderLayout()).add(BorderLayout.EAST,buttonClose).add(BorderLayout.WEST,buttonDialog));
 			
-	        buttonClose.addActionListener(new ActionListener(){
+	        buttonClose.addActionListener(new ActionListener<ActionEvent>(){
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					dialog.dispose();					
 				}  
 		    });  
 	        
-	        buttonDialog.addActionListener(new ActionListener(){
+	        buttonDialog.addActionListener(new ActionListener<ActionEvent>(){
 				@Override
 				public void actionPerformed(ActionEvent evt) {
 					preferencesReset();
@@ -322,7 +322,7 @@ public class ClassStartScreen {
 		toolbar.addComponentToSideMenu(new Label(" "));
 		toolbar.addMaterialCommandToSideMenu("  Habiltar tutorial", FontImage.MATERIAL_DASHBOARD, e -> {
 			preferencesResetFirstRuns();
-			new ClassStartScreen();
+			new StartScreen();
 		});
 		toolbar.addMaterialCommandToSideMenu("  Quero aulas de Alemão", FontImage.MATERIAL_EMAIL, e -> {
 			Message m = new Message("Olá, Torus, tenho interesse em aulas de alemão ....");
@@ -426,7 +426,5 @@ public class ClassStartScreen {
 	public Label getLabelCount () {
 		return labelCount;
 	}
-	
-	
 	
 }
