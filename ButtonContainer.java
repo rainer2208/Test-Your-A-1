@@ -1,6 +1,4 @@
-package com.torus.A1;
-
-import java.io.IOException;
+package com.torus.a1test.en;
 
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.io.Preferences;
@@ -9,19 +7,14 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Slider;
-import com.codename1.ui.animations.CommonTransitions;
-import com.codename1.ui.animations.Transition;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 
-public class ClassButtonContainer {
+
+public class ButtonContainer {
 
 	public static Button buttonAgain = new Button();
 	public static Button buttonInformation;
@@ -139,7 +132,7 @@ public class ClassButtonContainer {
 
 		int indexCorrects = Preferences.get("CorrectAnswers", 0);
 		int indexIncorrects = Preferences.get("InCorrectAnswers", 0);
-		int indexTotal = new ClassInputArrays().listcontrolStrings.size();
+		int indexTotal = new InputArrays().listcontrolStrings.size();
 
 		labelCount = new Label("James");
 

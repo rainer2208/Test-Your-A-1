@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +8,7 @@ import java.util.List;
  * @author rainer
  *
  */
-public class ClassInputArrays {
+public class InputArrays {
 	
 	// ClassCrossWords	
 	public ArrayList<List<String>> listCrossButtonPopups = new ArrayList<List<String>>();

@@ -1,8 +1,7 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 
-import com.codename1.components.InteractionDialog;
 import com.codename1.io.Preferences;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
@@ -14,7 +13,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.layouts.BorderLayout;
 
-public class ClassFirstRunDialogs {
+public class FirstRunDialogs {
 	
 	private Dialog dialogStart = new Dialog() {
     	@Override
@@ -53,7 +52,7 @@ public class ClassFirstRunDialogs {
 		
 	}
 	
-	public void dialogFirstRunStart (ClassPojos classPojos, Form form) {
+	public void dialogFirstRunStart (Pojos pojos, Form form) {
 		
 		try {
 			buttonClose = new Button("fechar");
@@ -67,7 +66,7 @@ public class ClassFirstRunDialogs {
 			// Dialog settings
 			dialogSettings (buttonClose,buttonDialog, containerDialogBase, label, dialogStart, popupBody);
 			
-			if (classPojos.getStringFirstRun().equals("first run start screen")) {
+			if (pojos.getStringFirstRun().equals("first run start screen")) {
 				
 			Image imgageBackground = Image.createImage("/Botton_Arrow.png");
 			popupBody.setText("Nesta tela tem quatro botões, cada qual para um desafio .... clique para testar!");
@@ -78,7 +77,7 @@ public class ClassFirstRunDialogs {
 				
 		        label.setIcon(imgageBackground);
 		        
-			} else if (classPojos.getStringFirstRun().equals("first run side menu")) {
+			} else if (pojos.getStringFirstRun().equals("first run side menu")) {
 				
 				Image imgageBackground = Image.createImage("/Botton_Arrow_Up.png");
 				popupBody.setText("Neste menu lateral tem várias opções de personalização e para entar em contato conosco!");
@@ -94,7 +93,7 @@ public class ClassFirstRunDialogs {
 			} else {
 				
 				Image imgageBackground = Image.createImage("/Botton_Arrow_Up.png");					
-				popupBody.setText(classPojos.getStringFirstRun());
+				popupBody.setText(pojos.getStringFirstRun());
 				popupBody.setRows(4);
 		        	containerDialogBase.add(BorderLayout.CENTER, popupBody);
 		       	 	containerDialogBase.add(BorderLayout.NORTH,label);
@@ -113,7 +112,7 @@ public class ClassFirstRunDialogs {
 	        });
 	        
 	        buttonDialog.addActionListener(l -> {
-	        	String stringPrefences = classPojos.getStringPreferences();
+	        	String stringPrefences = pojos.getStringPreferences();
 	        	Preferences.set(stringPrefences,1);
 	        	form.setScrollableY(true);
 	        	dialogStart.dispose();
@@ -126,7 +125,7 @@ public class ClassFirstRunDialogs {
 		
 	}
 	
-	public void firstRunNext (ClassPojos classPojos, Button buttonInformation, Button buttonNext, Button buttonAgain, Container containerButtonNext) throws IOException {
+	public void firstRunNext (Pojos pojos, Button buttonInformation, Button buttonNext, Button buttonAgain, Container containerButtonNext) throws IOException {
 		
 		buttonClose = new Button("fechar");
 		buttonDialog = new Button("okay");
@@ -135,7 +134,7 @@ public class ClassFirstRunDialogs {
 		Container containerDialog =  new Container(new BorderLayout());
 		Image imgageBackground = Image.createImage("/Botton_Arrow.png");
 		Label label = new Label();
-		String stringLevel = classPojos.getStringLevel();
+		String stringLevel = pojos.getStringLevel();
 		TextArea popupBody = new TextArea("Aperte este botão à esquerda para fazer a questão novamente.... !", 4, 10);
 		
 		// Dialog settings
@@ -165,16 +164,16 @@ public class ClassFirstRunDialogs {
         
         buttonDialog.addActionListener(l -> {
         	try {
-	           String string = classPojos.getStringLevel();		   
+	           String string = pojos.getStringLevel();		   
 	 		   if (string.equals("")) {		
-	 			    classPojos.setStringLevel("A");			
+	 			    pojos.setStringLevel("A");			
 	 		   } else if (string.equals("A")) {			   
-	 			   classPojos.setStringLevel("B");			   
+	 			   pojos.setStringLevel("B");			   
 	 		   } else if (string.equals("B")) {			   
-	 			   classPojos.setStringLevel("C");			
+	 			   pojos.setStringLevel("C");			
 	 		   } 
 	 		   dialogNext.dispose(); 		   
-	 		   firstRunNext(classPojos, buttonInformation, buttonNext, buttonAgain, containerButtonNext);
+	 		   firstRunNext(pojos, buttonInformation, buttonNext, buttonAgain, containerButtonNext);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}        	
@@ -193,7 +192,7 @@ public class ClassFirstRunDialogs {
      	    	containerDialog.add(BorderLayout.EAST,buttonClose);
      	    	containerDialog.add(BorderLayout.WEST,buttonDialog);
             	dialogNext.showPopupDialog(buttonNext); 
-            	if (classPojos.getStringFirstRun().equals("imported container")) {
+            	if (pojos.getStringFirstRun().equals("imported container")) {
 			enableNext();
 		}
             enableNextWord(containerButtonNext);
@@ -203,12 +202,12 @@ public class ClassFirstRunDialogs {
             break;
         case "C":
             dialogNext.dispose();
-            Preferences.set(classPojos.getStringPreferences(),1);           
+            Preferences.set(pojos.getStringPreferences(),1);           
             break;
  	   }		
 	}
 	
-	public void firstRunOK (ClassFrases classFrases , ClassTextQuestions classTextQuestions , ClassPojos classPojos , Button buttonOk , Form form) { 
+	public void firstRunOK (Frases frases , TextQuestions textQuestions , Pojos pojos , Button buttonOk , Form form) { 
 		
 		try {
 			
@@ -248,7 +247,7 @@ public class ClassFirstRunDialogs {
 	        	
 	        	buttonOk.setEnabled(true);
 	        	
-	        	String stringPrefences = classPojos.getStringPreferences();
+	        	String stringPrefences = pojos.getStringPreferences();
 	        	Preferences.set(stringPrefences,1);
 	        	
 	        	form.setScrollableY(true);
@@ -284,14 +283,14 @@ public class ClassFirstRunDialogs {
 		
 		buttonDialog.addActionListener(l->{
 			
-			for (Component component : ClassButtonContainer.containerButtonNext) {
+			for (Component component : ButtonContainer.containerButtonNext) {
 					component.setEnabled(true);
 				}
 			});
 		
 		buttonClose.addActionListener(l->{
 			
-			for (Component component : ClassButtonContainer.containerButtonNext) {
+			for (Component component : ButtonContainer.containerButtonNext) {
 					component.setEnabled(true);
 				}
 			});

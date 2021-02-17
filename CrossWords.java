@@ -1,4 +1,4 @@
-package com.torus.A1;
+package com.torus.a1test.en;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.UITimer;
 
-public class ClassCrossWords {
+public class CrossWords {
 	
 	private ArrayList<Button> listDropButtons = new ArrayList<>();
 	private ArrayList<Container> listContainers = new ArrayList<>();	
@@ -46,9 +46,9 @@ public class ClassCrossWords {
 	private Button buttonLetters; 
 	private Button buttonDialogAgain;
 	private Button buttonDialogHome;
-	private ClassFirstRunDialogs cfd = new ClassFirstRunDialogs();
-	private ClassInputArrays classInputArrays = new ClassInputArrays(); 
-	private ClassPojos classPojos = new ClassPojos();
+	private FirstRunDialogs cfd = new FirstRunDialogs();
+	private InputArrays inputArrays = new InputArrays(); 
+	private Pojos pojos = new Pojos();
 	private Container containerButtons = new Container(new GridLayout(2,6)) {
 		@Override
 	    public void drop(Component dragged, int x, int y) {
@@ -78,12 +78,12 @@ public class ClassCrossWords {
 	private Slider sliderCorrect;
 	private Slider sliderFalse;
 
-	public ClassCrossWords(Form formBack, ClassPojos2 classPojos2, Label label) throws IOException {
+	public CrossWords(Form formBack, Pojos2 pojos2, Label label) throws IOException {
 		// Back command
 	    Command back = new Command("A") {
 	        @Override
 	        public void actionPerformed(ActionEvent evt) {
-	        	label.setText(classPojos2.getintLabelCount() + "/ 95");
+	        	label.setText(pojos2.getintLabelCount() + "/ 95");
 	        	formBack.showBack();
 	        }
 	    }; 
@@ -91,11 +91,11 @@ public class ClassCrossWords {
 	    
 	    // call first run start
 	    if (Preferences.get("CwFirstRunStart",0) == 0) {
-			dialogFirstRunStart(classPojos);
+			dialogFirstRunStart(pojos);
 		}
 	    
 	    // Call input arrays 
-	    classInputArrays.consolidatedLists();
+	    inputArrays.consolidatedLists();
 	    
 	    // Add buttons to list 
 	    buttonOne.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_DOWNWARD, "", 4));
@@ -104,36 +104,36 @@ public class ClassCrossWords {
 	    buttonFour.setIcon(FontImage.createMaterial(FontImage.MATERIAL_ARROW_FORWARD, "", 4));
 	    
 	    // Put everything together 
-	    containerNext = ClassButtonContainer.containerMenu();
+	    containerNext = ButtonContainer.containerMenu();
 	    
 	    formCrossWords.add(containerButtons);
 		formCrossWords.add(containerBase);
 		formCrossWords.add(containerNext);
 		
 		// Get components form Button Class
-		buttonOk = ClassButtonContainer.buttonOk;
+		buttonOk = ButtonContainer.buttonOk;
 		buttonOkAction(buttonOk);
 		buttonOkTwo(buttonOk);
 		
-		buttonAgain = ClassButtonContainer.getButtonAgain();
-		buttonAgainAction(buttonAgain, classPojos2, formBack, label);
+		buttonAgain = ButtonContainer.getButtonAgain();
+		buttonAgainAction(buttonAgain, pojos2, formBack, label);
 		
-		buttonInfo = ClassButtonContainer.getButtonInfromation();
-		buttonInfoAction(buttonInfo, classPojos);
+		buttonInfo = ButtonContainer.getButtonInfromation();
+		buttonInfoAction(buttonInfo, pojos);
 		
-		buttonNext = ClassButtonContainer.getButtonNext();
-		buttonNextAction(buttonNext, classPojos, classPojos2, formBack, label);
+		buttonNext = ButtonContainer.getButtonNext();
+		buttonNextAction(buttonNext, pojos, pojos2, formBack, label);
 		
-		labelCount = ClassButtonContainer.getLabelCount();
+		labelCount = ButtonContainer.getLabelCount();
 		labelCount.setText(String.valueOf(Preferences.get("CwIndex",0) + 1) + "/ 7");
 		
-		sliderCorrect = ClassButtonContainer.getSliderCorrect();
+		sliderCorrect = ButtonContainer.getSliderCorrect();
 		sliderCorrect.setEditable(false);
 		sliderCorrect.setMinValue(0);
 		sliderCorrect.setMaxValue(intTotal);
 		sliderCorrect.setProgress(Preferences.get("CwCorrectAnswers",0));
 		sliderCorrect.setText(String.valueOf(Preferences.get("CwCorrectAnswers",0)));
-		sliderFalse = ClassButtonContainer.geSliderFalse();
+		sliderFalse = ButtonContainer.geSliderFalse();
 		sliderFalse.setEditable(false);
 		sliderFalse.setMinValue(0);
 		sliderFalse.setMaxValue(intTotal);	
@@ -156,25 +156,25 @@ public class ClassCrossWords {
 		
 		buttonOne.addActionListener(l -> {
 			
-			String stringButton = classInputArrays.listCrossButtonPopups.get(intIndex).get(0);
+			String stringButton = inputArrays.listCrossButtonPopups.get(intIndex).get(0);
 			buttonDialog(buttonOne, stringButton);
 		});
 		
 		buttonTwo.addActionListener(l -> {
 			
-			String stringButton = classInputArrays.listCrossButtonPopups.get(intIndex).get(1);
+			String stringButton = inputArrays.listCrossButtonPopups.get(intIndex).get(1);
 			buttonDialog(buttonTwo, stringButton);
 		});
 		
 		buttonThree.addActionListener(l -> {
 			
-			String stringButton = classInputArrays.listCrossButtonPopups.get(intIndex).get(2);
+			String stringButton = inputArrays.listCrossButtonPopups.get(intIndex).get(2);
 			buttonDialog(buttonThree, stringButton);
 		});
 		
 		buttonFour.addActionListener(l -> {
 			
-			String stringButton = classInputArrays.listCrossButtonPopups.get(intIndex).get(3);
+			String stringButton = inputArrays.listCrossButtonPopups.get(intIndex).get(3);
 			buttonDialog(buttonThree, stringButton);
 		});
 	}
@@ -183,7 +183,7 @@ public class ClassCrossWords {
 
 		button.addActionListener(l -> {
 			try {
-				new ClassFeedback().soundButton(media, inputStreamInButton);
+				new Feedback().soundButton(media, inputStreamInButton);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -192,9 +192,10 @@ public class ClassCrossWords {
 		button.addDropListener(l -> {
 			
 			try {
-				new ClassFeedback().soundButton(media, inputStreamInButton);				
+				new Feedback().soundButton(media, inputStreamInButton);				
 				
 			} catch (IOException e) {
+
 				e.printStackTrace();
 			}
 		});		
@@ -242,11 +243,11 @@ public class ClassCrossWords {
 	
 	}
 	
-	public void buttonAgainAction (Button button, ClassPojos2 classPojos2, Form formBack, Label label) {
+	public void buttonAgainAction (Button button, Pojos2 pojos2, Form formBack, Label label) {
 		
 		button.addActionListener(l-> {
 			try {
-				new ClassCrossWords(formBack, classPojos2, label);
+				new CrossWords(formBack, pojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -254,7 +255,7 @@ public class ClassCrossWords {
 		
 	}
 	
-	public void buttonNextAction (Button button , ClassPojos cPojos, ClassPojos2 classPojos2, Form formBack, Label label) {
+	public void buttonNextAction (Button button , Pojos cPojos, Pojos2 pojos2, Form formBack, Label label) {
 		
 		button.addActionListener(l-> {
 			
@@ -271,25 +272,25 @@ public class ClassCrossWords {
 					cPojos.setintFalse(intFalseNew);
 					cPojos.setintTotal(intTotal);
 					
-					ClassFeedback cf = new ClassFeedback();					
+					Feedback cf = new Feedback();					
 					cf.dialogFinal(cPojos);	
 					
 					buttonDialogAgain = cf.getButtonDialogRepeat();
 					buttonDialogHome = cf.getButtonDialogHome();
 					
-					dialogActions(formBack, classPojos2, label);
+					dialogActions(formBack, pojos2, label);
 					
 				} else {
 					
 					intLabelCount = sliderCorrect.getProgress() + Preferences.get("CorrectAnswers",0) 
 					+ Preferences.get("FrasesCorrectAnswers",0) + Preferences.get("QuestionsCorrectAnswers",0);
-					classPojos2.setintLabelCount(intLabelCount);
+					pojos2.setintLabelCount(intLabelCount);
 					
 					Preferences.set("CwCorrectAnswers",intCorNew);
 					Preferences.set("CwFalseAnswers",intFalseNew);
 					Preferences.set("CwIndex",intIndexNew);		
 				
-					new ClassCrossWords(formBack, classPojos2, label);
+					new CrossWords(formBack, pojos2, label);
 					
 				}
 				
@@ -302,7 +303,7 @@ public class ClassCrossWords {
 		
 	}
 	
-	public void dialogActions (Form formBack, ClassPojos2 cPojos, Label label) {
+	public void dialogActions (Form formBack, Pojos2 pojos2, Label label) {
 		
 		buttonDialogAgain.addActionListener(l-> {
 			
@@ -311,7 +312,7 @@ public class ClassCrossWords {
 				Preferences.set("CwFalseAnswers",0);
 				Preferences.set("CwIndex",0);	
 				
-				new ClassCrossWords(formBack , cPojos, label);
+				new CrossWords(formBack , pojos2, label);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -324,22 +325,22 @@ public class ClassCrossWords {
 				Preferences.set("CwFalseAnswers",0);
 				Preferences.set("CwIndex",0);	
 				
-				new ClassStartScreen().startScreen(classPojos, cPojos);
+				new StartScreen().startScreen(pojos, pojos2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 	}
 	
-	public void buttonInfoAction (Button button , ClassPojos cPojos) {
+	public void buttonInfoAction (Button button , Pojos pojos) {
 		
 		button.addActionListener(l -> { 
 			
 			try {
-				ArrayList <String> listDialog = classInputArrays.listCrossExplanation;
-				classPojos.setDialogList(listDialog);
-				classPojos.setintTotal(intIndex);
-				new ClassFeedback().dialogExplainFrases(classPojos);
+				ArrayList <String> listDialog = inputArrays.listCrossExplanation;
+				pojos.setDialogList(listDialog);
+				pojos.setintTotal(intIndex);
+				new Feedback().dialogExplainFrases(pojos);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -418,16 +419,16 @@ public class ClassCrossWords {
 			// Get words from crosswords and compare 
 			// Get string one 
 			StringBuilder stringOne = new StringBuilder();
-			String stringControlOne = classInputArrays.listCrossControlStrings.get(intIndex).get(0);
-			List <Integer> listIntsOne = classInputArrays.listCrossControlIntegers.get(intIndex).get(0);
+			String stringControlOne = inputArrays.listCrossControlStrings.get(intIndex).get(0);
+			List <Integer> listIntsOne = inputArrays.listCrossControlIntegers.get(intIndex).get(0);
 			for (int i : listIntsOne) {
 				stringOne.append(listGetChildren.get(i));
-				classPojos.setStringOneCw(stringOne.toString().trim());
+				pojos.setStringOneCw(stringOne.toString().trim());
 			}
 			
 			int intCorrectsOne = 0; 
 			int intFalsesOne = 0; 
-			String stringToCheckOne = classPojos.getStringOneCw();
+			String stringToCheckOne = pojos.getStringOneCw();
 			if (stringToCheckOne.equals(stringControlOne)) {
 				intCorrectsOne = 1;
 			} else {
@@ -435,16 +436,16 @@ public class ClassCrossWords {
 			}
 			// Get string two
 			StringBuilder stringTwo = new StringBuilder();
-			String stringControlTwo = classInputArrays.listCrossControlStrings.get(intIndex).get(1);
-			List <Integer> listIntsTwo = classInputArrays.listCrossControlIntegers.get(intIndex).get(1);
+			String stringControlTwo = inputArrays.listCrossControlStrings.get(intIndex).get(1);
+			List <Integer> listIntsTwo = inputArrays.listCrossControlIntegers.get(intIndex).get(1);
 			for (int i : listIntsTwo) {
 				stringTwo.append(listGetChildren.get(i));
-				classPojos.setStringTwoCw(stringTwo.toString().trim());	
+				pojos.setStringTwoCw(stringTwo.toString().trim());	
 			} 
 			
 			int intCorrectsTwo = 0;
 			int intFalsesTwo = 0;
-			String stringToCheckTwo = classPojos.getStringTwoCw();
+			String stringToCheckTwo = pojos.getStringTwoCw();
 			if (stringToCheckTwo.equals(stringControlTwo)) {
 				intCorrectsTwo = 1;
 			} else {
@@ -457,14 +458,14 @@ public class ClassCrossWords {
 			int intFalsesThree = 0;
 			
 			StringBuilder stringThree = new StringBuilder();
-			String stringControlThree = classInputArrays.listCrossControlStrings.get(intIndex).get(2);
-			List <Integer> listIntsThree = classInputArrays.listCrossControlIntegers.get(intIndex).get(2);
+			String stringControlThree = inputArrays.listCrossControlStrings.get(intIndex).get(2);
+			List <Integer> listIntsThree = inputArrays.listCrossControlIntegers.get(intIndex).get(2);
 			for (int i : listIntsThree) {
 				stringThree.append(listGetChildren.get(i));
-				classPojos.setStringThreeCw(stringThree.toString().trim());	
+				pojos.setStringThreeCw(stringThree.toString().trim());	
 				
 			} 
-			String stringToCheckThree = classPojos.getStringThreeCw();
+			String stringToCheckThree = pojos.getStringThreeCw();
 			if (stringToCheckThree.equals(stringControlThree)) {
 				intCorrectsThree = 1;
 			} else {
@@ -479,14 +480,14 @@ public class ClassCrossWords {
 			if (intIndex >= 3) {
 				
 				StringBuilder stringFour = new StringBuilder();
-				String stringControlFour = classInputArrays.listCrossControlStrings.get(intIndex).get(3);
-				List <Integer> listIntsFour = classInputArrays.listCrossControlIntegers.get(intIndex).get(3);
+				String stringControlFour = inputArrays.listCrossControlStrings.get(intIndex).get(3);
+				List <Integer> listIntsFour = inputArrays.listCrossControlIntegers.get(intIndex).get(3);
 				for (int i : listIntsFour) {
 					stringFour.append(listGetChildren.get(i));
-					classPojos.setStringFourCw(stringFour.toString().trim());						
+					pojos.setStringFourCw(stringFour.toString().trim());						
 				} 
 
-				String stringToCheckFour = classPojos.getStringFourCw();
+				String stringToCheckFour = pojos.getStringFourCw();
 				if (stringToCheckFour.equals(stringControlFour)) {
 					intCorrectsFour = 1;
 				} else {
@@ -497,11 +498,11 @@ public class ClassCrossWords {
 			// Set slider values
 			sliderCorrect.setText(String.valueOf(intCorrects + intCorrectsOne + intCorrectsTwo + intCorrectsThree + intCorrectsFour));
 			sliderCorrect.setProgress(intCorrects + intCorrectsOne + intCorrectsTwo + intCorrectsThree + intCorrectsFour);
-			classPojos.setintCorrects(intCorrects + intCorrectsOne + intCorrectsTwo + intCorrectsThree + intCorrectsFour);
+			pojos.setintCorrects(intCorrects + intCorrectsOne + intCorrectsTwo + intCorrectsThree + intCorrectsFour);
 			
 			sliderFalse.setText(String.valueOf(intFalses + intFalsesOne + intFalsesTwo + intFalsesThree + intFalsesFour));
 			sliderFalse.setProgress(intFalses + intFalsesOne + intFalsesTwo + intFalsesThree + intFalsesFour);	
-			classPojos.setintFalse(intFalses + intFalsesOne + intFalsesTwo + intFalsesThree + intFalsesFour);
+			pojos.setintFalse(intFalses + intFalsesOne + intFalsesTwo + intFalsesThree + intFalsesFour);
 			
 			// set all drags to false until class is reloaded
 			for (Button component : listDropButtons) {
@@ -509,17 +510,17 @@ public class ClassCrossWords {
 			}
 			// set feedback sound
 			int intCorLevel = intCorrectsOne + intCorrectsTwo + intCorrectsThree + intCorrectsFour;
-			int intCorLength = classInputArrays.listCrossControlStrings.get(intIndex).size();
+			int intCorLength = inputArrays.listCrossControlStrings.get(intIndex).size();
 
 			if (intCorLevel == intCorLength) {
 				try {
-					new ClassFeedback().soundCorrect(media, inputStream);
+					new Feedback().soundCorrect(media, inputStream);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			} else {
 				try {
-					new ClassFeedback().soundInCorrect(media, inputStream);
+					new Feedback().soundInCorrect(media, inputStream);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -532,7 +533,7 @@ public class ClassCrossWords {
 
 	public void buttonsForLetters () {
 		
-		List<String> stringsLettersCw = classInputArrays.listCrossLetters.get(intIndex);
+		List<String> stringsLettersCw = inputArrays.listCrossLetters.get(intIndex);
 	    Collections.shuffle(stringsLettersCw);
 	    
 	    for (String string : stringsLettersCw) {
@@ -600,7 +601,7 @@ public class ClassCrossWords {
 	
 	public void containerForCrossWord () {
 		
-		List<String> stringsCrossWord = classInputArrays.listCrossWords.get(intIndex); 
+		List<String> stringsCrossWord = inputArrays.listCrossWords.get(intIndex); 
 
  	    for (String string : stringsCrossWord) {
  			
@@ -656,15 +657,15 @@ public class ClassCrossWords {
 	
 	public void dialogFirstNext () throws IOException {
 		// Disable components until dialog is  closed		
-		for (Component component : ClassButtonContainer.containerButtonNext) {
+		for (Component component : ButtonContainer.containerButtonNext) {
 			component.setEnabled(false);
 		}
 		// Inform wether container  is imported 
-		classPojos.setStringFirstRun("imported container");
+		pojos.setStringFirstRun("imported container");
 		// Set preference to disable dialog
-		classPojos.setStringPreferences("FirstRunNext");
+		pojos.setStringPreferences("FirstRunNext");
 		// Call first run dialog
-		cfd.firstRunNext(classPojos, buttonInfo, buttonNext, buttonAgain, containerNext);
+		cfd.firstRunNext(pojos, buttonInfo, buttonNext, buttonAgain, containerNext);
 		Dialog dialog = cfd.getDialogNext();
 		dialog.showPopupDialog(buttonAgain);	
 		buttonOk.setEnabled(false);
@@ -672,13 +673,13 @@ public class ClassCrossWords {
 	
 	public void dialogFirstRunButtonOk() {
 				
-		cfd.firstRunOK(null , null, classPojos, buttonOk , formCrossWords);
+		cfd.firstRunOK(null , null, pojos, buttonOk , formCrossWords);
 		
 		UITimer timerThree = new UITimer(new Runnable() {			
 			@Override
 			public void run() {		
 
-				classPojos.setStringPreferences("CwFirstRunOk");
+				pojos.setStringPreferences("CwFirstRunOk");
 			
 				Dialog dialog = cfd.getDialogStart();
 				dialog.showPopupDialog(buttonOk);	
@@ -689,15 +690,15 @@ public class ClassCrossWords {
 		
 	}
 	
-	public void dialogFirstRunStart (ClassPojos classPojos) {
+	public void dialogFirstRunStart (Pojos pojos) {
 
 		UITimer timerTwo = new UITimer(new Runnable() {			
 				@Override
 				public void run() {	
-					classPojos.setStringFirstRun("Clique nos botões para ver a pergunta e arraste as letras para os campos abaixo.... ");
-					classPojos.setStringPreferences("CwFirstRunStart");
+					pojos.setStringFirstRun("Clique nos botões para ver a pergunta e arraste as letras para os campos abaixo.... ");
+					pojos.setStringPreferences("CwFirstRunStart");
 					// Call first run dialog
-					cfd.dialogFirstRunStart(classPojos, formCrossWords);
+					cfd.dialogFirstRunStart(pojos, formCrossWords);
 					// Call avtivation constructor
 					cfd.enableStart(containerButtons);
 					// Create interaction dialog
@@ -756,5 +757,3 @@ public class ClassCrossWords {
 	}
 	
 }
-
-
