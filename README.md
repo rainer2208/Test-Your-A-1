@@ -1,4 +1,4 @@
-# Andoid App - Test-Your-A-1
+# Andoid App - Test Your German Skills
 Initial commit
 On Google Play Store at: https://play.google.com/store/apps/details?id=com.torus.A1
-Test your German skill 
+Test your German skills
